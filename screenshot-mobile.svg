@@ -1,0 +1,127 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 540 720">
+  <defs>
+    <linearGradient id="mobileBg" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" style="stop-color:#0a0a0a;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#1a1a1a;stop-opacity:1" />
+    </linearGradient>
+    <linearGradient id="cardBg" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" style="stop-color:#1a1a1a;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#1e1e1e;stop-opacity:1" />
+    </linearGradient>
+    <filter id="glow">
+      <feGaussianBlur stdDeviation="2" result="coloredBlur"/>
+      <feMerge>
+        <feMergeNode in="coloredBlur"/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+  </defs>
+  
+  <!-- Background -->
+  <rect width="540" height="720" fill="url(#mobileBg)"/>
+  
+  <!-- Status Bar -->
+  <rect width="540" height="30" fill="#000000" opacity="0.5"/>
+  <text x="20" y="20" font-family="Inter" font-size="12" fill="#ffffff">9:41</text>
+  <text x="520" y="20" font-family="Inter" font-size="12" text-anchor="end" fill="#ffffff">100%</text>
+  
+  <!-- Header -->
+  <rect x="0" y="30" width="540" height="70" fill="#0a0a0a"/>
+  <text x="270" y="75" font-family="Inter" font-size="28" font-weight="700" text-anchor="middle" fill="#00ff88" style="filter: url(#glow)">MoodTracker Pro</text>
+  
+  <!-- Date Section -->
+  <text x="270" y="130" font-family="Inter" font-size="14" text-anchor="middle" fill="#999999">Today, October 5, 2025</text>
+  
+  <!-- Mood Selector Title -->
+  <text x="270" y="165" font-family="Inter" font-size="18" font-weight="600" text-anchor="middle" fill="#ffffff">How are you feeling?</text>
+  
+  <!-- Mood Icons with Labels -->
+  <g transform="translate(35, 185)">
+    <!-- Very Bad -->
+    <circle cx="45" cy="40" r="38" fill="#dc3545" opacity="0.2"/>
+    <text x="45" y="55" font-size="48" text-anchor="middle" fill="#dc3545">😢</text>
+    <text x="45" y="95" font-family="Inter" font-size="11" text-anchor="middle" fill="#999">Very Bad</text>
+    
+    <!-- Bad -->
+    <circle cx="135" cy="40" r="38" fill="#fd7e14" opacity="0.2"/>
+    <text x="135" y="55" font-size="48" text-anchor="middle" fill="#fd7e14">😞</text>
+    <text x="135" y="95" font-family="Inter" font-size="11" text-anchor="middle" fill="#999">Bad</text>
+    
+    <!-- Neutral -->
+    <circle cx="235" cy="40" r="38" fill="#ffc107" opacity="0.2"/>
+    <text x="235" y="55" font-size="48" text-anchor="middle" fill="#ffc107">😐</text>
+    <text x="235" y="95" font-family="Inter" font-size="11" text-anchor="middle" fill="#999">Neutral</text>
+    
+    <!-- Good -->
+    <circle cx="335" cy="40" r="40" fill="#00ff88" opacity="0.3" stroke="#00ff88" stroke-width="2"/>
+    <text x="335" y="55" font-size="52" text-anchor="middle" fill="#00ff88">😊</text>
+    <text x="335" y="95" font-family="Inter" font-size="11" font-weight="600" text-anchor="middle" fill="#00ff88">Good</text>
+    
+    <!-- Excellent -->
+    <circle cx="425" cy="40" r="38" fill="#28a745" opacity="0.2"/>
+    <text x="425" y="55" font-size="48" text-anchor="middle" fill="#28a745">😄</text>
+    <text x="425" y="95" font-family="Inter" font-size="11" text-anchor="middle" fill="#999">Excellent</text>
+  </g>
+  
+  <!-- Stats Cards -->
+  <g transform="translate(20, 310)">
+    <!-- Card 1: Total Entries -->
+    <rect width="155" height="80" rx="12" fill="url(#cardBg)" stroke="#00ff88" stroke-width="1.5"/>
+    <text x="77.5" y="30" font-family="Inter" font-size="14" text-anchor="middle" fill="#999">Total Entries</text>
+    <text x="77.5" y="60" font-family="Inter" font-size="28" font-weight="700" text-anchor="middle" fill="#00ff88">127</text>
+    
+    <!-- Card 2: Average Mood -->
+    <rect x="165" width="155" height="80" rx="12" fill="url(#cardBg)" stroke="#00ff88" stroke-width="1.5"/>
+    <text x="242.5" y="30" font-family="Inter" font-size="14" text-anchor="middle" fill="#999">Average</text>
+    <text x="242.5" y="60" font-family="Inter" font-size="28" font-weight="700" text-anchor="middle" fill="#00ff88">4.2</text>
+    
+    <!-- Card 3: Current Streak -->
+    <rect x="330" width="155" height="80" rx="12" fill="url(#cardBg)" stroke="#00ff88" stroke-width="1.5"/>
+    <text x="407.5" y="30" font-family="Inter" font-size="14" text-anchor="middle" fill="#999">Day Streak</text>
+    <text x="407.5" y="60" font-family="Inter" font-size="28" font-weight="700" text-anchor="middle" fill="#00ff88">14🔥</text>
+  </g>
+  
+  <!-- Recent Entry -->
+  <rect x="20" y="420" width="500" height="90" rx="12" fill="url(#cardBg)" stroke="#00ff88" stroke-width="1.5"/>
+  <text x="35" y="445" font-family="Inter" font-size="15" font-weight="600" fill="#00ff88">Latest Entry</text>
+  <text x="35" y="468" font-family="Inter" font-size="13" fill="#999">Yesterday, 8:30 PM</text>
+  <text x="485" y="468" font-family="Inter" font-size="32" text-anchor="end" fill="#00ff88">😊</text>
+  <text x="35" y="492" font-family="Inter" font-size="13" fill="#ffffff">Had a productive day at work...</text>
+  
+  <!-- Chart Section -->
+  <rect x="20" y="535" width="500" height="160" rx="12" fill="url(#cardBg)" stroke="#00ff88" stroke-width="1.5"/>
+  <text x="270" y="560" font-family="Inter" font-size="16" font-weight="600" text-anchor="middle" fill="#00ff88">7-Day Mood Trend</text>
+  
+  <!-- Chart Grid -->
+  <line x1="40" y1="580" x2="520" y2="580" stroke="#333" stroke-width="0.5" stroke-dasharray="2,2"/>
+  <line x1="40" y1="620" x2="520" y2="620" stroke="#333" stroke-width="0.5" stroke-dasharray="2,2"/>
+  <line x1="40" y1="660" x2="520" y2="660" stroke="#333" stroke-width="0.5" stroke-dasharray="2,2"/>
+  
+  <!-- Chart Line with Gradient -->
+  <defs>
+    <linearGradient id="chartGradient" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" style="stop-color:#00ff88;stop-opacity:0.3" />
+      <stop offset="100%" style="stop-color:#00ff88;stop-opacity:0" />
+    </linearGradient>
+  </defs>
+  <path d="M 60 640 L 130 610 L 200 630 L 270 595 L 340 605 L 410 585 L 480 590 L 480 680 L 60 680 Z" fill="url(#chartGradient)"/>
+  <polyline points="60,640 130,610 200,630 270,595 340,605 410,585 480,590" fill="none" stroke="#00ff88" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+  
+  <!-- Chart Points -->
+  <circle cx="60" cy="640" r="4" fill="#00ff88"/>
+  <circle cx="130" cy="610" r="4" fill="#00ff88"/>
+  <circle cx="200" cy="630" r="4" fill="#00ff88"/>
+  <circle cx="270" cy="595" r="4" fill="#00ff88"/>
+  <circle cx="340" cy="605" r="4" fill="#00ff88"/>
+  <circle cx="410" cy="585" r="4" fill="#00ff88"/>
+  <circle cx="480" cy="590" r="5" fill="#00ff88" stroke="#ffffff" stroke-width="2"/>
+  
+  <!-- Day Labels -->
+  <text x="60" y="693" font-family="Inter" font-size="10" text-anchor="middle" fill="#666">M</text>
+  <text x="130" y="693" font-family="Inter" font-size="10" text-anchor="middle" fill="#666">T</text>
+  <text x="200" y="693" font-family="Inter" font-size="10" text-anchor="middle" fill="#666">W</text>
+  <text x="270" y="693" font-family="Inter" font-size="10" text-anchor="middle" fill="#666">T</text>
+  <text x="340" y="693" font-family="Inter" font-size="10" text-anchor="middle" fill="#666">F</text>
+  <text x="410" y="693" font-family="Inter" font-size="10" text-anchor="middle" fill="#666">S</text>
+  <text x="480" y="693" font-family="Inter" font-size="10" text-anchor="middle" fill="#00ff88">S</text>
+</svg>

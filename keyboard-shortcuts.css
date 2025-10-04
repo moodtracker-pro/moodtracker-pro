@@ -1,0 +1,173 @@
+/* ==================== KEYBOARD SHORTCUTS HELP PANEL ==================== */
+
+.shortcut-help-modal {
+    max-width: 600px;
+    width: 90%;
+}
+
+.shortcut-help-modal .modal-header h2 {
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-md);
+    color: var(--primary-green);
+    text-shadow: var(--glow-subtle);
+}
+
+.shortcut-help-modal .modal-header h2 i {
+    font-size: 1.75rem;
+}
+
+.shortcuts-list {
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-md);
+    margin-bottom: var(--spacing-xl);
+}
+
+.shortcut-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: var(--spacing-md);
+    background: linear-gradient(135deg, var(--tertiary-black), var(--quaternary-black));
+    border: 1px solid rgba(0, 255, 136, 0.15);
+    border-radius: var(--radius-lg);
+    transition: all var(--transition-fast);
+}
+
+.shortcut-item:hover {
+    border-color: rgba(0, 255, 136, 0.4);
+    background: linear-gradient(135deg, var(--quaternary-black), var(--tertiary-black));
+    transform: translateX(5px);
+    box-shadow: 0 0 15px rgba(0, 255, 136, 0.2);
+}
+
+.shortcut-keys {
+    display: flex;
+    gap: var(--spacing-xs);
+    align-items: center;
+}
+
+.shortcut-keys kbd {
+    display: inline-block;
+    padding: 0.4rem 0.8rem;
+    background: linear-gradient(135deg, var(--secondary-black), var(--primary-black));
+    border: 2px solid var(--primary-green);
+    border-radius: var(--radius-md);
+    color: var(--primary-green);
+    font-family: 'Courier New', monospace;
+    font-size: 0.875rem;
+    font-weight: var(--font-weight-bold);
+    text-transform: uppercase;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3),
+                0 0 10px rgba(0, 255, 136, 0.3),
+                inset 0 1px 0 rgba(255, 255, 255, 0.1);
+    min-width: 2.5rem;
+    text-align: center;
+    letter-spacing: 0.5px;
+}
+
+.shortcut-action {
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-sm);
+    color: var(--text-primary);
+    font-size: 0.95rem;
+}
+
+.shortcut-action i {
+    color: var(--primary-green);
+    font-size: 1.1rem;
+    width: 1.5rem;
+    text-align: center;
+}
+
+.shortcut-tip {
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-sm);
+    padding: var(--spacing-md);
+    background: rgba(0, 255, 136, 0.05);
+    border: 1px solid rgba(0, 255, 136, 0.2);
+    border-radius: var(--radius-lg);
+    color: var(--text-secondary);
+    font-size: 0.875rem;
+}
+
+.shortcut-tip i {
+    color: var(--accent-green);
+    font-size: 1.2rem;
+}
+
+/* Shortcut Visual Hints on Buttons */
+.btn-with-shortcut {
+    position: relative;
+}
+
+.btn-with-shortcut::after {
+    content: attr(data-shortcut);
+    position: absolute;
+    top: -8px;
+    right: -8px;
+    padding: 0.2rem 0.4rem;
+    background: var(--primary-green);
+    color: var(--primary-black);
+    font-size: 0.65rem;
+    font-weight: var(--font-weight-bold);
+    border-radius: var(--radius-sm);
+    opacity: 0;
+    transition: opacity var(--transition-fast);
+    pointer-events: none;
+    box-shadow: 0 2px 8px rgba(0, 255, 136, 0.4);
+}
+
+.btn-with-shortcut:hover::after {
+    opacity: 1;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+    .shortcut-help-modal {
+        max-width: 95%;
+    }
+    
+    .shortcut-item {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: var(--spacing-sm);
+    }
+    
+    .shortcut-keys {
+        width: 100%;
+        justify-content: flex-start;
+    }
+    
+    .shortcut-action {
+        width: 100%;
+        padding-left: var(--spacing-sm);
+    }
+}
+
+@media (max-width: 480px) {
+    .shortcuts-list {
+        gap: var(--spacing-sm);
+    }
+    
+    .shortcut-item {
+        padding: var(--spacing-sm);
+    }
+    
+    .shortcut-keys kbd {
+        padding: 0.3rem 0.6rem;
+        font-size: 0.75rem;
+        min-width: 2rem;
+    }
+    
+    .shortcut-action {
+        font-size: 0.85rem;
+    }
+    
+    .shortcut-action i {
+        font-size: 1rem;
+    }
+}

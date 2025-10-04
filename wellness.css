@@ -1,0 +1,624 @@
+/* ==================== WELLNESS CENTER STYLES ==================== */
+
+/* Wellness Tabs */
+.wellness-tabs {
+    display: flex;
+    gap: var(--spacing-md);
+    margin-bottom: var(--spacing-xl);
+    padding: var(--spacing-md);
+    background: linear-gradient(135deg, rgba(20, 20, 20, 0.8), rgba(30, 30, 30, 0.8));
+    border: 2px solid rgba(0, 255, 136, 0.2);
+    border-radius: var(--radius-lg);
+    overflow-x: auto;
+}
+
+.wellness-tab {
+    flex: 1;
+    min-width: 120px;
+    padding: var(--spacing-md) var(--spacing-lg);
+    background: linear-gradient(135deg, rgba(30, 30, 30, 0.8), rgba(40, 40, 40, 0.8));
+    border: 2px solid rgba(0, 255, 136, 0.2);
+    border-radius: var(--radius-md);
+    color: var(--text-secondary);
+    font-size: 0.95rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all var(--transition-fast);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: var(--spacing-sm);
+}
+
+.wellness-tab i {
+    font-size: 1.5rem;
+    transition: all var(--transition-fast);
+}
+
+.wellness-tab:hover {
+    border-color: rgba(0, 255, 136, 0.5);
+    background: linear-gradient(135deg, rgba(35, 35, 35, 0.9), rgba(45, 45, 45, 0.9));
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(0, 255, 136, 0.2);
+}
+
+.wellness-tab.active {
+    border-color: var(--primary-green);
+    background: linear-gradient(135deg, rgba(0, 255, 136, 0.15), rgba(0, 255, 136, 0.05));
+    color: var(--primary-green);
+    box-shadow: 0 4px 16px rgba(0, 255, 136, 0.3);
+}
+
+.wellness-tab.active i {
+    transform: scale(1.1);
+    filter: drop-shadow(0 0 8px rgba(0, 255, 136, 0.6));
+}
+
+/* Wellness Content Panels */
+.wellness-content {
+    display: none;
+    animation: fadeIn 0.3s ease-in-out;
+}
+
+.wellness-content.active {
+    display: block;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(10px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* ==================== BREATHING EXERCISE ==================== */
+
+.breathing-exercise {
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-xl);
+}
+
+.breathing-exercise h2 {
+    color: var(--primary-green);
+    text-align: center;
+    font-size: 2rem;
+    margin: 0;
+    text-shadow: 0 0 20px rgba(0, 255, 136, 0.4);
+}
+
+.breathing-intro {
+    text-align: center;
+    color: var(--text-secondary);
+    font-size: 1.1rem;
+    margin: 0;
+}
+
+.breathing-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 400px;
+    background: 
+        radial-gradient(circle, rgba(0, 255, 136, 0.05), transparent 70%),
+        linear-gradient(135deg, rgba(20, 20, 20, 0.95), rgba(30, 30, 30, 0.95));
+    border: 2px solid rgba(0, 255, 136, 0.2);
+    border-radius: var(--radius-xl);
+    position: relative;
+    overflow: hidden;
+}
+
+.breathing-container::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(circle at center, rgba(0, 255, 136, 0.1), transparent);
+    animation: breathingGlow 4s ease-in-out infinite;
+    pointer-events: none;
+}
+
+@keyframes breathingGlow {
+    0%, 100% { opacity: 0.3; }
+    50% { opacity: 0.6; }
+}
+
+.breathing-circle {
+    width: 200px;
+    height: 200px;
+    border-radius: 50%;
+    background: radial-gradient(circle, rgba(0, 255, 136, 0.2), transparent);
+    border: 3px solid var(--primary-green);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: transform 4s ease-in-out;
+    box-shadow: 
+        0 0 40px rgba(0, 255, 136, 0.4),
+        inset 0 0 40px rgba(0, 255, 136, 0.2);
+}
+
+.breathing-text {
+    font-size: 2rem;
+    font-weight: 700;
+    color: var(--primary-green);
+    text-shadow: 0 0 15px rgba(0, 255, 136, 0.6);
+}
+
+.breathing-controls {
+    display: flex;
+    justify-content: center;
+    gap: var(--spacing-md);
+}
+
+.breathing-settings {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: var(--spacing-lg);
+    padding: var(--spacing-xl);
+    background: linear-gradient(135deg, rgba(20, 20, 20, 0.8), rgba(30, 30, 30, 0.8));
+    border: 2px solid rgba(0, 255, 136, 0.2);
+    border-radius: var(--radius-lg);
+}
+
+.breathing-setting {
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-sm);
+}
+
+.breathing-setting label {
+    color: var(--text-secondary);
+    font-weight: 600;
+    font-size: 0.9rem;
+}
+
+.breathing-setting select {
+    padding: var(--spacing-md);
+    background: linear-gradient(135deg, rgba(10, 10, 10, 0.9), rgba(20, 20, 20, 0.9));
+    border: 2px solid rgba(0, 255, 136, 0.3);
+    border-radius: var(--radius-md);
+    color: var(--text-primary);
+    font-size: 1rem;
+    cursor: pointer;
+    transition: all var(--transition-fast);
+}
+
+.breathing-setting select:focus {
+    outline: none;
+    border-color: var(--primary-green);
+    box-shadow: 0 0 0 3px rgba(0, 255, 136, 0.1);
+}
+
+.breathing-info {
+    padding: var(--spacing-xl);
+    background: linear-gradient(135deg, rgba(20, 20, 20, 0.8), rgba(30, 30, 30, 0.8));
+    border: 2px solid rgba(0, 255, 136, 0.2);
+    border-left: 4px solid var(--primary-green);
+    border-radius: var(--radius-lg);
+}
+
+.breathing-info h3 {
+    color: var(--primary-green);
+    margin: 0 0 var(--spacing-md) 0;
+}
+
+.breathing-info ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.breathing-info li {
+    color: var(--text-secondary);
+    padding: var(--spacing-sm) 0;
+    padding-left: var(--spacing-xl);
+    position: relative;
+}
+
+.breathing-info li::before {
+    content: '✓';
+    position: absolute;
+    left: 0;
+    color: var(--primary-green);
+    font-weight: bold;
+}
+
+/* ==================== MEDITATION CARDS ==================== */
+
+.meditation-section,
+.resources-section,
+.music-section {
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-xl);
+}
+
+.meditation-intro,
+.resources-intro,
+.music-intro {
+    text-align: center;
+    color: var(--text-secondary);
+    font-size: 1.1rem;
+    margin: 0;
+}
+
+.meditation-grid,
+.resources-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: var(--spacing-lg);
+}
+
+.meditation-card {
+    background: 
+        linear-gradient(135deg, rgba(20, 20, 20, 0.95), rgba(30, 30, 30, 0.95)),
+        radial-gradient(circle at top right, rgba(0, 255, 136, 0.08), transparent);
+    border: 2px solid rgba(0, 255, 136, 0.25);
+    border-radius: var(--radius-lg);
+    padding: var(--spacing-xl);
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-lg);
+    transition: all var(--transition-fast);
+    position: relative;
+    overflow: hidden;
+}
+
+.meditation-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 3px;
+    background: linear-gradient(90deg, var(--primary-green), transparent);
+    opacity: 0;
+    transition: opacity var(--transition-fast);
+}
+
+.meditation-card:hover {
+    border-color: rgba(0, 255, 136, 0.5);
+    transform: translateY(-4px);
+    box-shadow: 0 8px 24px rgba(0, 255, 136, 0.2);
+}
+
+.meditation-card:hover::before {
+    opacity: 1;
+}
+
+.meditation-icon {
+    width: 4rem;
+    height: 4rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: linear-gradient(135deg, rgba(0, 255, 136, 0.15), rgba(0, 255, 136, 0.05));
+    border: 2px solid rgba(0, 255, 136, 0.3);
+    border-radius: var(--radius-lg);
+    transition: all var(--transition-fast);
+}
+
+.meditation-icon i {
+    font-size: 2rem;
+    color: var(--primary-green);
+    filter: drop-shadow(0 0 10px rgba(0, 255, 136, 0.6));
+}
+
+.meditation-card:hover .meditation-icon {
+    transform: scale(1.1) rotate(-5deg);
+    box-shadow: 0 0 20px rgba(0, 255, 136, 0.4);
+}
+
+.meditation-info {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-sm);
+}
+
+.meditation-info h3 {
+    color: var(--text-primary);
+    font-size: 1.2rem;
+    margin: 0;
+}
+
+.meditation-meta {
+    display: flex;
+    gap: var(--spacing-md);
+    align-items: center;
+}
+
+.meditation-duration,
+.meditation-type {
+    color: var(--text-tertiary);
+    font-size: 0.85rem;
+    display: flex;
+    align-items: center;
+    gap: 0.3rem;
+}
+
+.meditation-duration i {
+    color: var(--primary-green);
+}
+
+.meditation-type {
+    padding: 0.2rem 0.6rem;
+    background: rgba(0, 255, 136, 0.1);
+    border: 1px solid rgba(0, 255, 136, 0.3);
+    border-radius: var(--radius-sm);
+}
+
+.meditation-info p {
+    color: var(--text-secondary);
+    line-height: 1.6;
+    margin: 0;
+}
+
+.meditation-play-btn {
+    width: 100%;
+}
+
+/* ==================== RESOURCE CARDS ==================== */
+
+.resource-card {
+    background: 
+        linear-gradient(135deg, rgba(20, 20, 20, 0.95), rgba(30, 30, 30, 0.95)),
+        radial-gradient(circle at top right, var(--resource-color, rgba(0, 255, 136, 0.08)), transparent);
+    border: 2px solid rgba(0, 255, 136, 0.25);
+    border-radius: var(--radius-lg);
+    padding: var(--spacing-xl);
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-lg);
+    transition: all var(--transition-fast);
+    position: relative;
+    overflow: hidden;
+}
+
+.resource-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 4px;
+    height: 100%;
+    background: var(--resource-color, var(--primary-green));
+    opacity: 0;
+    transition: opacity var(--transition-fast);
+}
+
+.resource-card:hover {
+    border-color: var(--resource-color, rgba(0, 255, 136, 0.5));
+    transform: translateY(-4px);
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.4);
+}
+
+.resource-card:hover::before {
+    opacity: 1;
+}
+
+.resource-icon {
+    width: 4rem;
+    height: 4rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: linear-gradient(135deg, var(--resource-color, rgba(0, 255, 136, 0.15)), transparent);
+    border: 2px solid var(--resource-color, rgba(0, 255, 136, 0.3));
+    border-radius: var(--radius-lg);
+    transition: all var(--transition-fast);
+}
+
+.resource-icon i {
+    font-size: 2rem;
+    color: var(--resource-color, var(--primary-green));
+    filter: drop-shadow(0 0 10px var(--resource-color, rgba(0, 255, 136, 0.6)));
+}
+
+.resource-card:hover .resource-icon {
+    transform: scale(1.1) rotate(5deg);
+}
+
+.resource-info {
+    flex: 1;
+}
+
+.resource-category {
+    display: inline-block;
+    padding: 0.3rem 0.8rem;
+    background: var(--resource-color, rgba(0, 255, 136, 0.1));
+    color: var(--resource-color, var(--primary-green));
+    border-radius: var(--radius-sm);
+    font-size: 0.8rem;
+    font-weight: 600;
+    margin-bottom: var(--spacing-sm);
+}
+
+.resource-info h3 {
+    color: var(--text-primary);
+    font-size: 1.2rem;
+    margin: 0 0 var(--spacing-sm) 0;
+}
+
+.resource-info p {
+    color: var(--text-secondary);
+    line-height: 1.6;
+    margin: 0;
+}
+
+.resource-link-btn {
+    width: 100%;
+}
+
+/* ==================== MUSIC PLAYER ==================== */
+
+.music-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: var(--spacing-lg);
+}
+
+.music-card {
+    background: 
+        linear-gradient(135deg, rgba(20, 20, 20, 0.95), rgba(30, 30, 30, 0.95)),
+        radial-gradient(circle at center, var(--music-color, rgba(0, 255, 136, 0.08)), transparent);
+    border: 2px solid rgba(0, 255, 136, 0.25);
+    border-radius: var(--radius-lg);
+    padding: var(--spacing-lg);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: var(--spacing-md);
+    text-align: center;
+    transition: all var(--transition-fast);
+    position: relative;
+    overflow: hidden;
+}
+
+.music-card::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(circle at center, var(--music-color, rgba(0, 255, 136, 0.15)), transparent);
+    opacity: 0;
+    transition: opacity var(--transition-fast);
+}
+
+.music-card:hover {
+    border-color: var(--music-color, rgba(0, 255, 136, 0.5));
+    transform: translateY(-4px) scale(1.02);
+    box-shadow: 0 8px 24px var(--music-color, rgba(0, 255, 136, 0.2));
+}
+
+.music-card:hover::before {
+    opacity: 1;
+}
+
+.music-icon {
+    width: 5rem;
+    height: 5rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: linear-gradient(135deg, var(--music-color, rgba(0, 255, 136, 0.2)), transparent);
+    border: 3px solid var(--music-color, rgba(0, 255, 136, 0.4));
+    border-radius: 50%;
+    transition: all var(--transition-fast);
+    position: relative;
+    z-index: 1;
+}
+
+.music-icon i {
+    font-size: 2.5rem;
+    color: var(--music-color, var(--primary-green));
+    filter: drop-shadow(0 0 15px var(--music-color, rgba(0, 255, 136, 0.8)));
+}
+
+.music-card:hover .music-icon {
+    transform: scale(1.15) rotate(10deg);
+    box-shadow: 0 0 30px var(--music-color, rgba(0, 255, 136, 0.5));
+}
+
+.music-info {
+    flex: 1;
+    position: relative;
+    z-index: 1;
+}
+
+.music-info h3 {
+    color: var(--text-primary);
+    font-size: 1.1rem;
+    margin: 0 0 var(--spacing-sm) 0;
+}
+
+.music-info p {
+    color: var(--text-secondary);
+    font-size: 0.9rem;
+    margin: 0;
+}
+
+.music-play-btn {
+    width: 100%;
+    position: relative;
+    z-index: 1;
+}
+
+/* ==================== RESPONSIVE DESIGN ==================== */
+
+@media (max-width: 768px) {
+    .wellness-tabs {
+        flex-wrap: wrap;
+    }
+    
+    .wellness-tab {
+        flex: 1 1 calc(50% - var(--spacing-md));
+        min-width: 0;
+    }
+    
+    .breathing-circle {
+        width: 150px;
+        height: 150px;
+    }
+    
+    .breathing-text {
+        font-size: 1.5rem;
+    }
+    
+    .breathing-settings {
+        grid-template-columns: 1fr;
+    }
+    
+    .meditation-grid,
+    .resources-grid {
+        grid-template-columns: 1fr;
+    }
+    
+    .music-grid {
+        grid-template-columns: 1fr;
+    }
+}
+
+@media (max-width: 480px) {
+    .wellness-tab {
+        flex: 1 1 100%;
+    }
+    
+    .breathing-container {
+        min-height: 300px;
+    }
+    
+    .breathing-circle {
+        width: 120px;
+        height: 120px;
+    }
+    
+    .breathing-text {
+        font-size: 1.2rem;
+    }
+}
+
+/* ==================== ANIMATIONS ==================== */
+
+@keyframes pulseGlow {
+    0%, 100% {
+        box-shadow: 0 0 20px rgba(0, 255, 136, 0.3);
+    }
+    50% {
+        box-shadow: 0 0 40px rgba(0, 255, 136, 0.6);
+    }
+}
+
+.meditation-icon:hover,
+.resource-icon:hover,
+.music-icon:hover {
+    animation: pulseGlow 2s ease-in-out infinite;
+}
+
+/* Scroll behavior for wellness content */
+.wellness-content {
+    scroll-behavior: smooth;
+}

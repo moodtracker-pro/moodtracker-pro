@@ -1,0 +1,1513 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MoodTracker Pro - 企业级情绪追踪系统</title>
+    
+    <!-- PWA Manifest -->
+    <link rel="manifest" href="./manifest.json">
+    
+    <!-- PWA Meta Tags -->
+    <meta name="theme-color" content="#00ff88">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="apple-mobile-web-app-title" content="MoodTracker Pro">
+    <meta name="mobile-web-app-capable" content="yes">
+    
+    <!-- PWA Icons -->
+    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 192 192'%3E%3Crect width='192' height='192' fill='%230a0a0a' rx='32'/%3E%3Ctext x='96' y='130' font-size='100' text-anchor='middle' fill='%2300ff88'%3E😊%3C/text%3E%3C/svg%3E">
+    <link rel="apple-touch-icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 192 192'%3E%3Crect width='192' height='192' fill='%230a0a0a' rx='32'/%3E%3Ctext x='96' y='130' font-size='100' text-anchor='middle' fill='%2300ff88'%3E😊%3C/text%3E%3C/svg%3E">
+    
+    <!-- SEO Meta Tags -->
+    <meta name="description" content="Track, analyze, and understand your emotional well-being with advanced insights and beautiful visualizations">
+    <meta name="keywords" content="mood tracker, mental health, wellness, emotional tracking, self-care">
+    <meta name="author" content="MoodTracker Pro">
+    
+    <!-- Open Graph / Social Media -->
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="MoodTracker Pro - Personal Mood & Wellness Journal">
+    <meta property="og:description" content="Track, analyze, and understand your emotional well-being">
+    <meta property="og:image" content="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 512 512'%3E%3Crect width='512' height='512' fill='%230a0a0a' rx='80'/%3E%3Ctext x='256' y='350' font-size='280' text-anchor='middle' fill='%2300ff88'%3E😊%3C/text%3E%3C/svg%3E">
+    <link rel="stylesheet" href="styles.css?v=2025100401">
+    <link rel="stylesheet" href="mobile-responsive.css">
+    <link rel="stylesheet" href="ai-assistant.css">
+    <link rel="stylesheet" href="keyboard-shortcuts.css">
+    <link rel="stylesheet" href="accessibility.css">
+    <link rel="stylesheet" href="webhook-integration.css">
+    <link rel="stylesheet" href="plugin-marketplace.css">
+    <link rel="stylesheet" href="wellness.css">
+    <link rel="stylesheet" href="voice-input.css">
+    <link rel="stylesheet" href="help-system.css">
+    <link rel="stylesheet" href="print.css" media="print">
+    <link rel="stylesheet" href="offline-support.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/date-fns@2.29.3/index.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/docx@7.8.0/build/index.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/FileSaver.js/2.0.5/FileSaver.min.js"></script>
+    <!-- Export Libraries -->
+    <script src="https://cdn.jsdelivr.net/npm/xlsx@0.18.5/dist/xlsx.full.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/html2canvas@1.4.1/dist/html2canvas.min.js"></script>
+    <script src="i18n.js"></script>
+    <script src="wellness-tips.js"></script>
+</head>
+<body>
+    <!-- Skip to main content link for keyboard users -->
+    <a href="#main-content" class="skip-link">Skip to main content</a>
+    
+    <!-- Header -->
+    <header class="header" role="banner">
+        <div class="container">
+            <div class="header-left">
+                <div class="logo">
+                    <i class="fas fa-brain"></i>
+                    <span>MoodTracker Pro</span>
+                </div>
+            </div>
+            
+            <div class="header-center">
+                <nav class="nav" role="navigation" aria-label="Main navigation">
+                    <a href="#dashboard" class="nav-link active" data-section="dashboard" 
+                       role="button" aria-label="Dashboard - View your mood statistics" 
+                       aria-current="page" tabindex="0">
+                        <i class="fas fa-chart-line" aria-hidden="true"></i>
+                        <span>Dashboard</span>
+                    </a>
+                    <a href="#tracker" class="nav-link" data-section="tracker" 
+                       role="button" aria-label="Track Mood - Record new mood entry" 
+                       tabindex="0">
+                        <i class="fas fa-plus-circle" aria-hidden="true"></i>
+                        <span>Track Mood</span>
+                    </a>
+                    <a href="#analytics" class="nav-link" data-section="analytics" 
+                       role="button" aria-label="Analytics - View detailed analytics" 
+                       tabindex="0">
+                        <i class="fas fa-analytics" aria-hidden="true"></i>
+                        <span>Analytics</span>
+                    </a>
+                    <a href="#insights" class="nav-link" data-section="insights" 
+                       role="button" aria-label="Insights - View AI-powered insights" 
+                       tabindex="0">
+                        <i class="fas fa-lightbulb" aria-hidden="true"></i>
+                        <span>Insights</span>
+                    </a>
+                    <a href="#wellness" class="nav-link" data-section="wellness" 
+                       role="button" aria-label="Wellness - Access mental health resources" 
+                       tabindex="0">
+                        <i class="fas fa-spa" aria-hidden="true"></i>
+                        <span>Wellness</span>
+                    </a>
+                </nav>
+            </div>
+            
+            <div class="header-right">
+                <div class="actions-toolbar">
+                    <div class="export-dropdown">
+                        <button class="btn-primary" id="exportDropdownBtn">
+                            <i class="fas fa-download"></i>
+                            <span class="btn-text">Export</span>
+                            <i class="fas fa-chevron-down"></i>
+                        </button>
+                        <div class="export-menu" id="exportMenu">
+                            <button class="export-option" data-format="csv">
+                                <i class="fas fa-file-csv"></i>
+                                <span>CSV Data</span>
+                            </button>
+                            <button class="export-option" data-format="icalendar">
+                                <i class="fas fa-calendar-alt"></i>
+                                <span>iCal Calendar</span>
+                            </button>
+                            <button class="export-option" data-format="image">
+                                <i class="fas fa-file-image"></i>
+                                <span>Image Report</span>
+                            </button>
+                            <div class="export-divider"></div>
+                            <button class="export-option" data-format="markdown">
+                                <i class="fab fa-markdown"></i>
+                                <span>Markdown</span>
+                            </button>
+                            <button class="export-option" data-format="pdf">
+                                <i class="fas fa-file-pdf"></i>
+                                <span>PDF Report</span>
+                            </button>
+                            <button class="export-option" data-format="docx">
+                                <i class="fas fa-file-word"></i>
+                                <span>Word Document</span>
+                            </button>
+                            <div class="export-divider"></div>
+                            <button class="export-option" data-format="print">
+                                <i class="fas fa-print"></i>
+                                <span>Print</span>
+                            </button>
+                        </div>
+                    </div>
+                    
+                    <div class="personal-dropdown">
+                        <button class="btn-primary" id="personalDropdownBtn">
+                            <i class="fas fa-user-cog"></i>
+                            <span class="btn-text">Personal</span>
+                            <i class="fas fa-chevron-down"></i>
+                        </button>
+                        <div class="personal-menu" id="personalMenu">
+                            <button class="personal-option" id="customMoodScale">
+                                <i class="fas fa-sliders-h"></i>
+                                <span>Custom Mood Scale</span>
+                            </button>
+                            <button class="personal-option" id="moodReminders">
+                                <i class="fas fa-bell"></i>
+                                <span>Mood Reminders</span>
+                            </button>
+                            <button class="personal-option" id="notificationSettings">
+                                <i class="fas fa-cog"></i>
+                                <span>Notification Settings</span>
+                            </button>
+                            <div class="export-divider"></div>
+                            <button class="personal-option" id="languageSettings">
+                                <i class="fas fa-language"></i>
+                                <span id="languageToggleText">Language / 语言</span>
+                            </button>
+                            <button class="personal-option" id="timezoneSettings">
+                                <i class="fas fa-globe"></i>
+                                <span>Timezone / 时区</span>
+                            </button>
+                            <button class="personal-option" id="themeSettings">
+                                <i class="fas fa-palette"></i>
+                                <span>Theme / 主题</span>
+                            </button>
+                            <div class="export-divider"></div>
+                            <button class="personal-option" id="goalsSettings">
+                                <i class="fas fa-bullseye"></i>
+                                <span>Goals / 目标设置</span>
+                            </button>
+                            <button class="personal-option" id="achievementsSettings">
+                                <i class="fas fa-trophy"></i>
+                                <span>Achievements / 成就徽章</span>
+                            </button>
+                            <button class="personal-option" id="importDataSettings">
+                                <i class="fas fa-file-import"></i>
+                                <span>Import Data / 数据导入</span>
+                            </button>
+                            <button class="personal-option" id="backupRestoreSettings">
+                                <i class="fas fa-database"></i>
+                                <span>Backup & Restore / 备份恢复</span>
+                            </button>
+                            <button class="personal-option" id="offlineCacheSettings">
+                                <i class="fas fa-wifi"></i>
+                                <span>Offline & Cache / 离线缓存</span>
+                            </button>
+                        </div>
+                    </div>
+                    
+                    <button class="btn-primary" id="helpCenterBtn" title="Help Center">
+                        <i class="fas fa-question-circle"></i>
+                        <span class="btn-text">Help</span>
+                    </button>
+                    
+                    <div class="data-actions">
+                        <button class="btn-primary" id="clearData" title="Clear All Data">
+                            <i class="fas fa-trash"></i>
+                            <span class="btn-text">Clear</span>
+                        </button>
+                        
+                        <div class="auto-cleanup-dropdown">
+                            <button class="btn-primary" id="autoCleanupBtn" title="Auto Cleanup Settings">
+                                <i class="fas fa-clock"></i>
+                                <span class="btn-text">Auto Clean</span>
+                                <i class="fas fa-chevron-down"></i>
+                            </button>
+                            <div class="auto-cleanup-menu" id="autoCleanupMenu">
+                                <div class="cleanup-option" data-days="0">
+                                    <i class="fas fa-ban"></i>
+                                    <span>Disabled</span>
+                                </div>
+                                <div class="cleanup-option" data-days="7">
+                                    <i class="fas fa-calendar-week"></i>
+                                    <span>7 Days</span>
+                                </div>
+                                <div class="cleanup-option" data-days="30">
+                                    <i class="fas fa-calendar-alt"></i>
+                                    <span>30 Days</span>
+                                </div>
+                                <div class="cleanup-option" data-days="90">
+                                    <i class="fas fa-calendar"></i>
+                                    <span>3 Months</span>
+                                </div>
+                                <div class="cleanup-option" data-days="365">
+                                    <i class="fas fa-calendar-plus"></i>
+                                    <span>1 Year</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="main" id="main-content" role="main">
+        <!-- Dashboard Section -->
+        <section id="dashboard" class="section active" aria-label="Dashboard">
+            <h2 class="sr-only">Dashboard - Your Mood Overview</h2>
+            <div class="container">
+                <div class="section-header">
+                    <div style="display: flex; justify-content: space-between; align-items: flex-start; width: 100%;">
+                        <div>
+                            <h1>Dashboard Overview</h1>
+                            <p>Your emotional wellness at a glance</p>
+                            <p id="timezoneInfo" style="font-size: 0.85rem; color: var(--gray-400); margin-top: 8px;"></p>
+                        </div>
+                        <div style="display: flex; gap: 0.5rem;">
+                            <button class="btn-secondary" id="viewDensityBtn" style="display: flex; align-items: center; gap: 0.5rem;" title="Toggle View Density">
+                                <i class="fas fa-compress-alt" id="viewDensityIcon"></i>
+                                <span id="viewDensityText">Compact</span>
+                            </button>
+                            <button class="btn-secondary" id="widgetManagerBtn" style="display: flex; align-items: center; gap: 0.5rem;" title="Manage Widgets">
+                                <i class="fas fa-th"></i>
+                                <span id="widgetManagerText">Widgets</span>
+                            </button>
+                            <button class="btn-secondary" id="customizeLayoutBtn" style="display: flex; align-items: center; gap: 0.5rem;" title="Customize Layout">
+                                <i class="fas fa-grip-vertical"></i>
+                                <span id="customizeLayoutText">Customize</span>
+                            </button>
+                            <button class="btn-secondary" id="accessibilityBtn" style="display: flex; align-items: center; gap: 0.5rem;" title="Accessibility Settings">
+                                <i class="fas fa-universal-access"></i>
+                                <span id="accessibilityText">Accessibility</span>
+                            </button>
+                            <button class="btn-secondary" id="webhookBtn" style="display: flex; align-items: center; gap: 0.5rem;" title="Webhook Integration">
+                                <i class="fas fa-webhook"></i>
+                                <span id="webhookText">Webhook</span>
+                            </button>
+                            <button class="btn-secondary" id="pluginMarketplaceBtn" style="display: flex; align-items: center; gap: 0.5rem;" title="Plugin Marketplace">
+                                <i class="fas fa-puzzle-piece"></i>
+                                <span id="pluginMarketplaceText">Plugins</span>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="stats-grid" id="statsGrid">
+                    <div class="stat-card" data-widget-id="total-entries" draggable="false">
+                        <div class="drag-handle" style="display: none;">
+                            <i class="fas fa-grip-vertical"></i>
+                        </div>
+                        <div class="stat-icon">
+                            <i class="fas fa-calendar-day"></i>
+                        </div>
+                        <div class="stat-content">
+                            <h3 id="totalEntries">0</h3>
+                            <p>Total Entries</p>
+                        </div>
+                    </div>
+                    <div class="stat-card" data-widget-id="average-mood" draggable="false">
+                        <div class="drag-handle" style="display: none;">
+                            <i class="fas fa-grip-vertical"></i>
+                        </div>
+                        <div class="stat-icon">
+                            <i class="fas fa-smile"></i>
+                        </div>
+                        <div class="stat-content">
+                            <h3 id="averageMood">0.0</h3>
+                            <p>Average Mood</p>
+                        </div>
+                    </div>
+                    <div class="stat-card" data-widget-id="current-streak" draggable="false">
+                        <div class="drag-handle" style="display: none;">
+                            <i class="fas fa-grip-vertical"></i>
+                        </div>
+                        <div class="stat-icon">
+                            <i class="fas fa-fire"></i>
+                        </div>
+                        <div class="stat-content">
+                            <h3 id="currentStreak">0</h3>
+                            <p>Day Streak</p>
+                        </div>
+                    </div>
+                    <div class="stat-card" data-widget-id="mood-trend" draggable="false">
+                        <div class="drag-handle" style="display: none;">
+                            <i class="fas fa-grip-vertical"></i>
+                        </div>
+                        <div class="stat-icon">
+                            <i class="fas fa-chart-line"></i>
+                        </div>
+                        <div class="stat-content">
+                            <h3 id="moodTrend">Stable</h3>
+                            <p>Mood Trend</p>
+                        </div>
+                    </div>
+                    
+                    <!-- Goals Progress Cards -->
+                    <div class="stat-card" data-widget-id="mood-goal" draggable="false" id="moodGoalCard" style="display: none;">
+                        <div class="drag-handle" style="display: none;">
+                            <i class="fas fa-grip-vertical"></i>
+                        </div>
+                        <div class="stat-icon">
+                            <i class="fas fa-bullseye"></i>
+                        </div>
+                        <div class="stat-content">
+                            <h3 id="moodGoalProgress">0%</h3>
+                            <p id="moodGoalLabel">Mood Goal</p>
+                            <div class="progress-bar" style="width: 100%; height: 6px; background: rgba(0, 255, 136, 0.2); border-radius: 3px; margin-top: 0.5rem; overflow: hidden;">
+                                <div id="moodGoalBar" style="height: 100%; background: var(--primary-green); border-radius: 3px; width: 0%; transition: width 0.5s ease;"></div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="stat-card" data-widget-id="streak-goal" draggable="false" id="streakGoalCard" style="display: none;">
+                        <div class="drag-handle" style="display: none;">
+                            <i class="fas fa-grip-vertical"></i>
+                        </div>
+                        <div class="stat-icon">
+                            <i class="fas fa-fire"></i>
+                        </div>
+                        <div class="stat-content">
+                            <h3 id="streakGoalProgress">0 / 7</h3>
+                            <p id="streakGoalLabel">Streak Goal</p>
+                            <div class="progress-bar" style="width: 100%; height: 6px; background: rgba(0, 255, 136, 0.2); border-radius: 3px; margin-top: 0.5rem; overflow: hidden;">
+                                <div id="streakGoalBar" style="height: 100%; background: var(--primary-green); border-radius: 3px; width: 0%; transition: width 0.5s ease;"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="dashboard-charts">
+                    <div class="chart-container">
+                        <h3 id="weeklyChartTitle">7-Day Mood Trend</h3>
+                        <canvas id="weeklyChart" 
+                                role="img" 
+                                aria-labelledby="weeklyChartTitle" 
+                                aria-describedby="weeklyChartDesc"></canvas>
+                        <div id="weeklyChartDesc" class="sr-only">Line chart showing your mood trend over the past 7 days</div>
+                    </div>
+                    <div class="entries-section">
+                        <!-- Search and Filter Section -->
+                        <div class="search-filter-container">
+                            <div class="search-bar-wrapper">
+                                <div class="search-bar">
+                                    <i class="fas fa-search search-icon"></i>
+                                    <input 
+                                        type="text" 
+                                        id="searchInput" 
+                                        class="search-input" 
+                                        placeholder="Search by note, tag, or date... (Ctrl+F)"
+                                        autocomplete="off"
+                                        title="Search (Ctrl+F)"
+                                    >
+                                    <button class="clear-search-btn" id="clearSearchBtn" style="display: none;">
+                                        <i class="fas fa-times"></i>
+                                    </button>
+                                </div>
+                                <button class="filter-toggle-btn" id="filterToggleBtn">
+                                    <i class="fas fa-sliders-h"></i>
+                                    <span>Filters</span>
+                                    <span class="filter-badge" id="filterBadge" style="display: none;">0</span>
+                                </button>
+                            </div>
+
+                            <!-- Advanced Filters Panel -->
+                            <div class="filters-panel" id="filtersPanel">
+                                <div class="filters-grid">
+                                    <!-- Date Range Filter -->
+                                    <div class="filter-group">
+                                        <label class="filter-label">
+                                            <i class="fas fa-calendar-alt"></i>
+                                            Date Range
+                                        </label>
+                                        <div class="date-range-inputs">
+                                            <input type="date" id="dateFrom" class="filter-input" max="2099-12-31">
+                                            <span class="date-separator">to</span>
+                                            <input type="date" id="dateTo" class="filter-input" max="2099-12-31">
+                                        </div>
+                                    </div>
+
+                                    <!-- Mood Range Filter -->
+                                    <div class="filter-group">
+                                        <label class="filter-label">
+                                            <i class="fas fa-smile"></i>
+                                            Mood Range
+                                        </label>
+                                        <div class="mood-range-slider">
+                                            <input type="range" id="moodMinRange" class="range-input" min="1" max="5" value="1">
+                                            <input type="range" id="moodMaxRange" class="range-input" min="1" max="5" value="5">
+                                            <div class="range-labels">
+                                                <span id="moodMinLabel">1</span>
+                                                <span>-</span>
+                                                <span id="moodMaxLabel">5</span>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <!-- Tags Filter -->
+                                    <div class="filter-group">
+                                        <label class="filter-label">
+                                            <i class="fas fa-tags"></i>
+                                            Tags
+                                        </label>
+                                        <div class="tags-filter-container">
+                                            <div id="availableTagsFilter" class="available-tags-filter">
+                                                <!-- Will be populated dynamically -->
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="filter-actions">
+                                    <button class="btn-secondary" id="clearFiltersBtn">
+                                        <i class="fas fa-undo"></i>
+                                        Clear All
+                                    </button>
+                                    <button class="btn-primary" id="applyFiltersBtn">
+                                        <i class="fas fa-check"></i>
+                                        Apply Filters
+                                    </button>
+                                </div>
+                            </div>
+
+                            <!-- Search History -->
+                            <div class="search-history" id="searchHistory" style="display: none;">
+                                <div class="search-history-header">
+                                    <span>Recent Searches</span>
+                                    <button class="clear-history-btn" id="clearHistoryBtn">
+                                        <i class="fas fa-trash-alt"></i>
+                                    </button>
+                                </div>
+                                <div class="search-history-list" id="searchHistoryList">
+                                    <!-- Will be populated dynamically -->
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Search Results Info -->
+                        <div class="search-results-info" id="searchResultsInfo" style="display: none;">
+                            <span class="results-count" id="resultsCount">0 results found</span>
+                            <button class="clear-results-btn" id="clearResultsBtn">
+                                <i class="fas fa-times"></i>
+                                Clear search
+                            </button>
+                        </div>
+
+                        <!-- Recent Entries -->
+                        <div class="recent-entries">
+                            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem;">
+                                <h3 style="margin: 0;">Recent Entries</h3>
+                                <button class="btn-secondary" id="bulkOperationsBtn" style="display: flex; align-items: center; gap: 0.5rem; padding: 0.5rem 1rem;">
+                                    <i class="fas fa-tasks"></i>
+                                    <span id="bulkOperationsText">Batch Edit</span>
+                                </button>
+                            </div>
+                            
+                            <!-- Batch Operations Toolbar -->
+                            <div id="batchOperationsToolbar" style="display: none; padding: 1rem; background: rgba(0, 255, 136, 0.05); border: 1px solid rgba(0, 255, 136, 0.3); border-radius: 12px; margin-bottom: 1rem;">
+                                <div style="display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 1rem;">
+                                    <div style="display: flex; align-items: center; gap: 1rem;">
+                                        <label style="display: flex; align-items: center; gap: 0.5rem; color: var(--gray-300); cursor: pointer;">
+                                            <input type="checkbox" id="selectAllEntries" style="width: 18px; height: 18px; cursor: pointer;">
+                                            <span id="selectAllText">Select All</span>
+                                        </label>
+                                        <span id="selectedCount" style="color: var(--primary-green); font-weight: 600;">0 selected</span>
+                                    </div>
+                                    <div style="display: flex; gap: 0.5rem;">
+                                        <button class="btn-secondary" id="batchEditTagsBtn" style="display: flex; align-items: center; gap: 0.5rem; padding: 0.5rem 1rem;" disabled>
+                                            <i class="fas fa-tags"></i>
+                                            <span id="batchEditTagsText">Edit Tags</span>
+                                        </button>
+                                        <button class="btn-secondary" id="batchDeleteBtn" style="display: flex; align-items: center; gap: 0.5rem; padding: 0.5rem 1rem; background: rgba(255, 68, 68, 0.2); border-color: #ff4444;" disabled>
+                                            <i class="fas fa-trash"></i>
+                                            <span id="batchDeleteText">Delete</span>
+                                        </button>
+                                        <button class="btn-secondary" id="cancelBatchBtn" style="display: flex; align-items: center; gap: 0.5rem; padding: 0.5rem 1rem;">
+                                            <i class="fas fa-times"></i>
+                                            <span id="cancelBatchText">Cancel</span>
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div id="recentEntriesList" class="entries-list">
+                                <!-- Recent entries will be populated here -->
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Tracker Section -->
+        <section id="tracker" class="section" aria-label="Track Mood">
+            <h2 class="sr-only">Track Your Mood</h2>
+            <div class="container">
+                <div class="section-header">
+                    <div class="header-content">
+                        <div>
+                            <h1>Track Your Mood</h1>
+                            <p>Record your daily emotional state</p>
+                        </div>
+                        <div class="mode-toggle">
+                            <button class="mode-toggle-btn" id="modeToggleBtn">
+                                <i class="fas fa-bolt"></i>
+                                <span id="modeToggleText">Quick Mode</span>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Quick Input Mode -->
+                <div class="quick-input-mode" id="quickInputMode" style="display: none;">
+                    <div class="quick-mode-header">
+                        <div class="quick-mode-title">
+                            <i class="fas fa-bolt"></i>
+                            <h3>Quick Entry</h3>
+                            <span class="quick-mode-badge">Fast</span>
+                        </div>
+                        <p>Tap a mood to save instantly</p>
+                    </div>
+                    
+                    <div class="quick-mood-grid">
+                        <button class="quick-mood-btn" data-quick-mood="1" data-label="Very Bad">
+                            <span class="quick-mood-icon">😭</span>
+                            <span class="quick-mood-label">Very Bad</span>
+                        </button>
+                        <button class="quick-mood-btn" data-quick-mood="2" data-label="Bad">
+                            <span class="quick-mood-icon">🙁</span>
+                            <span class="quick-mood-label">Bad</span>
+                        </button>
+                        <button class="quick-mood-btn" data-quick-mood="3" data-label="Neutral">
+                            <span class="quick-mood-icon">😐</span>
+                            <span class="quick-mood-label">Neutral</span>
+                        </button>
+                        <button class="quick-mood-btn" data-quick-mood="4" data-label="Good">
+                            <span class="quick-mood-icon">🙂</span>
+                            <span class="quick-mood-label">Good</span>
+                        </button>
+                        <button class="quick-mood-btn" data-quick-mood="5" data-label="Excellent">
+                            <span class="quick-mood-icon">😄</span>
+                            <span class="quick-mood-label">Excellent</span>
+                        </button>
+                    </div>
+                    
+                    <div class="quick-mode-info">
+                        <i class="fas fa-info-circle"></i>
+                        <span>Click any mood to save instantly. Need more details? Switch to <strong>Normal Mode</strong>.</span>
+                    </div>
+                    
+                    <div class="recent-quick-entries" id="recentQuickEntries">
+                        <h4>Today's Quick Entries</h4>
+                        <div class="quick-entries-list" id="quickEntriesList">
+                            <!-- Will be populated dynamically -->
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Normal Tracker Form -->
+                <div class="tracker-form" id="normalTrackerForm">
+                    <div class="mood-selector" role="group" aria-labelledby="mood-question">
+                        <h3 id="mood-question">How are you feeling today?</h3>
+                        <div class="mood-options" role="radiogroup" aria-label="Mood selection">
+                            <button class="mood-btn" data-mood="1" data-label="Very Bad" 
+                                    role="radio" aria-checked="false" 
+                                    aria-label="Select Very Bad mood - Level 1 of 5" 
+                                    tabindex="0">
+                                <span class="mood-icon" aria-hidden="true">😢</span>
+                                <span class="mood-text">Very Bad</span>
+                            </button>
+                            <button class="mood-btn" data-mood="2" data-label="Bad" 
+                                    role="radio" aria-checked="false" 
+                                    aria-label="Select Bad mood - Level 2 of 5" 
+                                    tabindex="-1">
+                                <span class="mood-icon" aria-hidden="true">😟</span>
+                                <span class="mood-text">Bad</span>
+                            </button>
+                            <button class="mood-btn" data-mood="3" data-label="Okay" 
+                                    role="radio" aria-checked="false" 
+                                    aria-label="Select Okay mood - Level 3 of 5" 
+                                    tabindex="-1">
+                                <span class="mood-icon" aria-hidden="true">😐</span>
+                                <span class="mood-text">Okay</span>
+                            </button>
+                            <button class="mood-btn" data-mood="4" data-label="Good" 
+                                    role="radio" aria-checked="false" 
+                                    aria-label="Select Good mood - Level 4 of 5" 
+                                    tabindex="-1">
+                                <span class="mood-icon" aria-hidden="true">😊</span>
+                                <span class="mood-text">Good</span>
+                            </button>
+                            <button class="mood-btn" data-mood="5" data-label="Excellent" 
+                                    role="radio" aria-checked="false" 
+                                    aria-label="Select Excellent mood - Level 5 of 5" 
+                                    tabindex="-1">
+                                <span class="mood-icon" aria-hidden="true">😄</span>
+                                <span class="mood-text">Excellent</span>
+                            </button>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <div class="note-header">
+                            <label for="moodNote" id="moodNoteLabel">What's on your mind? (Optional)</label>
+                            <div class="note-actions">
+                                <div class="markdown-toggle">
+                                    <button type="button" id="markdownEditBtn" class="mode-btn active" title="Edit Mode">
+                                        <i class="fas fa-edit"></i>
+                                    </button>
+                                    <button type="button" id="markdownPreviewBtn" class="mode-btn" title="Preview Mode">
+                                        <i class="fas fa-eye"></i>
+                                    </button>
+                                </div>
+                                <button type="button" id="noteTemplateBtn" class="icon-btn" title="Use Template">
+                                    <i class="fas fa-file-alt"></i>
+                                </button>
+                                <div id="noteTemplateMenu" class="template-menu" style="display: none;">
+                                    <div class="template-menu-header">
+                                        <span>Note Templates</span>
+                                        <button type="button" id="saveTemplateBtn" class="icon-btn-small" title="Save as Template">
+                                            <i class="fas fa-save"></i>
+                                        </button>
+                                    </div>
+                                    <div class="template-list">
+                                        <div class="template-item" data-template="daily">
+                                            <i class="fas fa-calendar-day"></i>
+                                            <span>Daily Reflection</span>
+                                        </div>
+                                        <div class="template-item" data-template="gratitude">
+                                            <i class="fas fa-heart"></i>
+                                            <span>Gratitude Journal</span>
+                                        </div>
+                                        <div class="template-item" data-template="goals">
+                                            <i class="fas fa-bullseye"></i>
+                                            <span>Goals & Progress</span>
+                                        </div>
+                                        <div class="template-item" data-template="anxiety">
+                                            <i class="fas fa-brain"></i>
+                                            <span>Anxiety Relief</span>
+                                        </div>
+                                        <div class="template-item" data-template="success">
+                                            <i class="fas fa-trophy"></i>
+                                            <span>Success Diary</span>
+                                        </div>
+                                        <div id="customTemplates" class="custom-templates"></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- Markdown Toolbar -->
+                        <div class="markdown-toolbar" id="markdownToolbar">
+                            <button type="button" class="toolbar-btn" data-action="bold" title="Bold (Ctrl+B)">
+                                <i class="fas fa-bold"></i>
+                            </button>
+                            <button type="button" class="toolbar-btn" data-action="italic" title="Italic (Ctrl+I)">
+                                <i class="fas fa-italic"></i>
+                            </button>
+                            <button type="button" class="toolbar-btn" data-action="heading" title="Heading">
+                                <i class="fas fa-heading"></i>
+                            </button>
+                            <div class="toolbar-separator"></div>
+                            <button type="button" class="toolbar-btn" data-action="list" title="Bullet List">
+                                <i class="fas fa-list-ul"></i>
+                            </button>
+                            <button type="button" class="toolbar-btn" data-action="ordered-list" title="Numbered List">
+                                <i class="fas fa-list-ol"></i>
+                            </button>
+                            <button type="button" class="toolbar-btn" data-action="checkbox" title="Task List">
+                                <i class="fas fa-check-square"></i>
+                            </button>
+                            <div class="toolbar-separator"></div>
+                            <button type="button" class="toolbar-btn" data-action="link" title="Link">
+                                <i class="fas fa-link"></i>
+                            </button>
+                            <button type="button" class="toolbar-btn" data-action="code" title="Code">
+                                <i class="fas fa-code"></i>
+                            </button>
+                            <button type="button" class="toolbar-btn" data-action="quote" title="Quote">
+                                <i class="fas fa-quote-right"></i>
+                            </button>
+                            <div class="toolbar-separator"></div>
+                            <button type="button" class="toolbar-btn" id="voiceInputBtn" title="Voice Input (Ctrl+Shift+V)">
+                                <i class="fas fa-microphone"></i>
+                            </button>
+                        </div>
+                        
+                        <!-- Voice Input Status -->
+                        <div id="voiceInputStatus" class="voice-input-status" style="display: none;">
+                            <div class="voice-animation">
+                                <span class="voice-pulse"></span>
+                                <span class="voice-pulse"></span>
+                                <span class="voice-pulse"></span>
+                            </div>
+                            <span class="voice-text">Listening...</span>
+                            <button type="button" class="voice-stop-btn" id="voiceStopBtn">
+                                <i class="fas fa-stop"></i>
+                            </button>
+                        </div>
+                        
+                        <textarea id="moodNote" 
+                                  aria-labelledby="moodNoteLabel" 
+                                  aria-describedby="markdownToolbar" 
+                                  placeholder="Describe your feelings, what happened today, or any thoughts you'd like to remember..."
+                                  aria-multiline="true"></textarea>
+                        <div id="markdownPreview" class="markdown-preview" 
+                             role="region" 
+                             aria-label="Markdown preview" 
+                             aria-live="polite" 
+                             style="display: none;"></div>
+                        
+                        <!-- Image Attachments -->
+                        <div class="image-attachment-section">
+                            <div class="attachment-header">
+                                <label>
+                                    <i class="fas fa-image"></i>
+                                    <span>Photos (optional)</span>
+                                </label>
+                                <button type="button" id="uploadImageBtn" class="icon-btn-small">
+                                    <i class="fas fa-plus"></i>
+                                    <span>Add Photo</span>
+                                </button>
+                                <input type="file" id="imageFileInput" accept="image/*" multiple style="display: none;">
+                            </div>
+                            <div id="imagePreviewContainer" class="image-preview-container"></div>
+                            <div id="dropZone" class="drop-zone" style="display: none;">
+                                <i class="fas fa-cloud-upload-alt"></i>
+                                <p>Drop images here or click to upload</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="moodTags">Tags</label>
+                        <div class="tag-selector">
+                            <button type="button" class="tag-btn" data-tag="work">Work</button>
+                            <button type="button" class="tag-btn" data-tag="family">Family</button>
+                            <button type="button" class="tag-btn" data-tag="health">Health</button>
+                            <button type="button" class="tag-btn" data-tag="social">Social</button>
+                            <button type="button" class="tag-btn" data-tag="exercise">Exercise</button>
+                            <button type="button" class="tag-btn" data-tag="sleep">Sleep</button>
+                            <button type="button" class="tag-btn" data-tag="stress">Stress</button>
+                            <button type="button" class="tag-btn" data-tag="achievement">Achievement</button>
+                        </div>
+                        
+                        <!-- Custom Tag Input with Autocomplete -->
+                        <div class="custom-tag-input-container">
+                            <div class="custom-tag-input-wrapper">
+                                <input type="text" id="customTagInput" class="custom-tag-input" placeholder="Add custom tag..." autocomplete="off">
+                                <button type="button" id="addCustomTagBtn" class="add-tag-btn" title="Add Tag">
+                                    <i class="fas fa-plus"></i>
+                                </button>
+                            </div>
+                            <div id="tagAutocomplete" class="tag-autocomplete-dropdown" style="display: none;"></div>
+                        </div>
+                        
+                        <!-- Selected Tags Display -->
+                        <div id="selectedTagsDisplay" class="selected-tags-display"></div>
+                    </div>
+
+                    <button id="saveMood" class="btn-primary btn-with-shortcut" disabled
+                            aria-label="Save mood entry"
+                            aria-disabled="true"
+                            data-shortcut="Ctrl+S"
+                            title="Save Entry (Ctrl+S)">
+                        <i class="fas fa-save" aria-hidden="true"></i>
+                        Save Entry
+                    </button>
+                </div>
+            </div>
+        </section>
+
+        <!-- Analytics Section -->
+        <section id="analytics" class="section" aria-label="Analytics">
+            <h2 class="sr-only">Analytics - Detailed Mood Statistics</h2>
+            <div class="container">
+                <div class="section-header">
+                    <h1>Mood Analytics</h1>
+                    <p>Deep insights into your emotional patterns</p>
+                </div>
+
+                <div class="analytics-controls">
+                    <select id="timeRange" class="select-input">
+                        <option value="7">Last 7 days</option>
+                        <option value="30">Last 30 days</option>
+                        <option value="90">Last 3 months</option>
+                        <option value="365">Last year</option>
+                    </select>
+                </div>
+
+                <!-- Heatmap Calendar -->
+                <div class="heatmap-section">
+                    <div class="heatmap-header">
+                        <h3>Mood Heatmap Calendar</h3>
+                        <div class="heatmap-controls">
+                            <button class="heatmap-year-btn" id="prevYear">
+                                <i class="fas fa-chevron-left"></i>
+                            </button>
+                            <span id="heatmapYear" class="heatmap-year">2025</span>
+                            <button class="heatmap-year-btn" id="nextYear">
+                                <i class="fas fa-chevron-right"></i>
+                            </button>
+                            <button class="chart-export-btn" id="exportHeatmapBtn" title="Export Heatmap">
+                                <i class="fas fa-download"></i>
+                            </button>
+                        </div>
+                    </div>
+                    <div class="heatmap-legend">
+                        <span>Less</span>
+                        <div class="legend-scale">
+                            <div class="legend-item" data-level="0"></div>
+                            <div class="legend-item" data-level="1"></div>
+                            <div class="legend-item" data-level="2"></div>
+                            <div class="legend-item" data-level="3"></div>
+                            <div class="legend-item" data-level="4"></div>
+                            <div class="legend-item" data-level="5"></div>
+                        </div>
+                        <span>More</span>
+                    </div>
+                    <div id="heatmapCalendar" class="heatmap-calendar"></div>
+                </div>
+
+                <div class="analytics-grid">
+                    <div class="chart-panel">
+                        <div class="chart-header">
+                            <h3 id="moodDistChartTitle">Mood Distribution</h3>
+                            <button class="chart-export-btn" data-chart="moodDistribution" title="Export Chart">
+                                <i class="fas fa-download"></i>
+                            </button>
+                        </div>
+                        <canvas id="moodDistributionChart" 
+                                role="img" 
+                                aria-labelledby="moodDistChartTitle" 
+                                aria-describedby="moodDistChartDesc"></canvas>
+                        <div id="moodDistChartDesc" class="sr-only">Pie chart showing the distribution of your mood entries across different levels</div>
+                    </div>
+                    <div class="chart-panel">
+                        <div class="chart-header">
+                            <h3 id="monthlyTrendChartTitle">Monthly Trend</h3>
+                            <button class="chart-export-btn" data-chart="monthlyTrend" title="Export Chart">
+                                <i class="fas fa-download"></i>
+                            </button>
+                        </div>
+                        <canvas id="monthlyTrendChart" 
+                                role="img" 
+                                aria-labelledby="monthlyTrendChartTitle" 
+                                aria-describedby="monthlyTrendChartDesc"></canvas>
+                        <div id="monthlyTrendChartDesc" class="sr-only">Line chart displaying mood trends over the past 30 days</div>
+                    </div>
+                    <div class="chart-panel">
+                        <div class="chart-header">
+                            <h3 id="radarChartTitle">Mood Dimensions Radar</h3>
+                            <button class="chart-export-btn" data-chart="radarChart" title="Export Chart">
+                                <i class="fas fa-download"></i>
+                            </button>
+                        </div>
+                        <canvas id="radarChart" 
+                                role="img" 
+                                aria-labelledby="radarChartTitle" 
+                                aria-describedby="radarChartDesc"></canvas>
+                        <div id="radarChartDesc" class="sr-only">Radar chart showing multi-dimensional mood assessment</div>
+                    </div>
+                    <div class="chart-panel">
+                        <div class="chart-header">
+                            <h3 id="tagAnalysisChartTitle">Tag Analysis</h3>
+                            <button class="chart-export-btn" data-chart="tagAnalysis" title="Export Chart">
+                                <i class="fas fa-download"></i>
+                            </button>
+                        </div>
+                        <canvas id="tagAnalysisChart" 
+                                role="img" 
+                                aria-labelledby="tagAnalysisChartTitle" 
+                                aria-describedby="tagAnalysisChartDesc"></canvas>
+                        <div id="tagAnalysisChartDesc" class="sr-only">Horizontal bar chart showing mood analysis by tags or activities</div>
+                    </div>
+                    <div class="chart-panel">
+                        <div class="chart-header">
+                            <h3 id="weeklyPatternChartTitle">Weekly Pattern</h3>
+                            <button class="chart-export-btn" data-chart="weeklyPattern" title="Export Chart">
+                                <i class="fas fa-download"></i>
+                            </button>
+                        </div>
+                        <canvas id="weeklyPatternChart" 
+                                role="img" 
+                                aria-labelledby="weeklyPatternChartTitle" 
+                                aria-describedby="weeklyPatternChartDesc"></canvas>
+                        <div id="weeklyPatternChartDesc" class="sr-only">Bar chart showing average mood by day of the week</div>
+                    </div>
+                    <div class="chart-panel">
+                        <div class="chart-header">
+                            <h3 id="areaChartTitle">Mood Trend Area</h3>
+                            <button class="chart-export-btn" data-chart="areaChart" title="Export Chart">
+                                <i class="fas fa-download"></i>
+                            </button>
+                        </div>
+                        <canvas id="areaChart" 
+                                role="img" 
+                                aria-labelledby="areaChartTitle" 
+                                aria-describedby="areaChartDesc"></canvas>
+                        <div id="areaChartDesc" class="sr-only">Area chart showing mood trends over time</div>
+                    </div>
+                    <div class="chart-panel">
+                        <div class="chart-header">
+                            <h3 id="scatterChartTitle">Tag-Mood Correlation</h3>
+                            <button class="chart-export-btn" data-chart="scatterChart" title="Export Chart">
+                                <i class="fas fa-download"></i>
+                            </button>
+                        </div>
+                        <canvas id="scatterChart" 
+                                role="img" 
+                                aria-labelledby="scatterChartTitle" 
+                                aria-describedby="scatterChartDesc"></canvas>
+                        <div id="scatterChartDesc" class="sr-only">Scatter plot showing relationship between tags and mood values</div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Insights Section -->
+        <section id="insights" class="section" aria-label="Insights">
+            <h2 class="sr-only">Insights - AI-Powered Recommendations</h2>
+            <div class="container">
+                <div class="section-header">
+                    <h1>AI-Powered Insights</h1>
+                    <p>Personalized recommendations for your wellbeing</p>
+                </div>
+
+                <div class="insights-grid">
+                    <div class="insight-card">
+                        <div class="insight-icon">
+                            <i class="fas fa-brain"></i>
+                        </div>
+                        <div class="insight-content">
+                            <h3>Pattern Recognition</h3>
+                            <div id="patternInsights" class="insight-text">
+                                Analyzing your mood patterns...
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="insight-card">
+                        <div class="insight-icon">
+                            <i class="fas fa-lightbulb"></i>
+                        </div>
+                        <div class="insight-content">
+                            <h3>Recommendations</h3>
+                            <div id="recommendations" class="insight-text">
+                                Generating personalized recommendations...
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="insight-card">
+                        <div class="insight-icon">
+                            <i class="fas fa-trophy"></i>
+                        </div>
+                        <div class="insight-content">
+                            <h3>Achievements</h3>
+                            <div id="achievements" class="insight-text">
+                                Tracking your progress...
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Advanced Analytics Panel -->
+                <div class="advanced-analytics-section">
+                    <div class="section-header">
+                        <h2>Advanced Analytics</h2>
+                        <p>Deep insights into your emotional patterns</p>
+                    </div>
+
+                    <div class="analytics-tabs">
+                        <button class="analytics-tab active" data-tab="correlation">Tag Correlation</button>
+                        <button class="analytics-tab" data-tab="anomalies">Mood Alerts</button>
+                        <button class="analytics-tab" data-tab="comparison">Period Comparison</button>
+                        <button class="analytics-tab" data-tab="prediction">Trend Forecast</button>
+                    </div>
+
+                    <div class="analytics-content">
+                        <!-- Tag Correlation Tab -->
+                        <div id="correlationTab" class="analytics-tab-content active">
+                            <div class="correlation-header">
+                                <h3>Tag-Mood Correlation Analysis</h3>
+                                <p>How different activities affect your mood</p>
+                            </div>
+                            <div id="tagCorrelationChart" class="correlation-container"></div>
+                        </div>
+
+                        <!-- Mood Anomalies Tab -->
+                        <div id="anomaliesTab" class="analytics-tab-content">
+                            <div class="anomalies-header">
+                                <h3>Mood Fluctuation Alerts</h3>
+                                <p>Unusual patterns detected in your emotional state</p>
+                            </div>
+                            <div id="anomaliesContainer" class="anomalies-list"></div>
+                        </div>
+
+                        <!-- Period Comparison Tab -->
+                        <div id="comparisonTab" class="analytics-tab-content">
+                            <div class="comparison-header">
+                                <h3>Time Period Comparison</h3>
+                                <div class="comparison-selectors">
+                                    <select id="comparisonType">
+                                        <option value="week">Week vs Week</option>
+                                        <option value="month">Month vs Month</option>
+                                        <option value="custom">Custom Range</option>
+                                    </select>
+                                    <button id="runComparison" class="btn-secondary">Compare</button>
+                                </div>
+                            </div>
+                            <div id="comparisonResults" class="comparison-container"></div>
+                        </div>
+
+                        <!-- Trend Prediction Tab -->
+                        <div id="predictionTab" class="analytics-tab-content">
+                            <div class="prediction-header">
+                                <h3>7-Day Mood Forecast</h3>
+                                <p>Predicted emotional trends based on your history</p>
+                            </div>
+                            <div id="predictionChart" class="prediction-container"></div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="wellness-tips">
+                    <h3>Daily Wellness Tips</h3>
+                    <div id="dailyTips" class="tips-container">
+                        <!-- Tips will be populated here -->
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Wellness Section -->
+        <section id="wellness" class="section" aria-label="Wellness Resources">
+            <h2 class="sr-only">Wellness - Mental Health Resources</h2>
+            <div class="container">
+                <div class="section-header">
+                    <h1>Wellness Center</h1>
+                    <p>Tools and resources for your mental wellbeing</p>
+                </div>
+
+                <!-- Wellness Navigation Tabs -->
+                <div class="wellness-tabs">
+                    <button class="wellness-tab active" data-wellness-tab="breathing">
+                        <i class="fas fa-wind"></i>
+                        <span>Breathing</span>
+                    </button>
+                    <button class="wellness-tab" data-wellness-tab="meditation">
+                        <i class="fas fa-om"></i>
+                        <span>Meditation</span>
+                    </button>
+                    <button class="wellness-tab" data-wellness-tab="resources">
+                        <i class="fas fa-book-medical"></i>
+                        <span>Resources</span>
+                    </button>
+                    <button class="wellness-tab" data-wellness-tab="music">
+                        <i class="fas fa-music"></i>
+                        <span>Relaxation</span>
+                    </button>
+                </div>
+
+                <!-- Breathing Exercise Tab -->
+                <div class="wellness-content active" data-wellness-content="breathing">
+                    <div class="breathing-exercise">
+                        <h2>Breathing Exercise</h2>
+                        <p class="breathing-intro">Follow the animated circle to regulate your breathing and reduce stress</p>
+                        
+                        <div class="breathing-container">
+                            <div class="breathing-circle" id="breathingCircle">
+                                <div class="breathing-text" id="breathingText">Breathe</div>
+                            </div>
+                        </div>
+                        
+                        <div class="breathing-controls">
+                            <button class="btn-primary" id="startBreathingBtn">
+                                <i class="fas fa-play"></i> Start Exercise
+                            </button>
+                            <button class="btn-secondary" id="stopBreathingBtn" style="display: none;">
+                                <i class="fas fa-stop"></i> Stop
+                            </button>
+                        </div>
+                        
+                        <div class="breathing-settings">
+                            <div class="breathing-setting">
+                                <label>Inhale Duration</label>
+                                <select id="inhaleTime">
+                                    <option value="3">3 seconds</option>
+                                    <option value="4" selected>4 seconds</option>
+                                    <option value="5">5 seconds</option>
+                                    <option value="6">6 seconds</option>
+                                </select>
+                            </div>
+                            <div class="breathing-setting">
+                                <label>Hold Duration</label>
+                                <select id="holdTime">
+                                    <option value="4">4 seconds</option>
+                                    <option value="7" selected>7 seconds</option>
+                                    <option value="10">10 seconds</option>
+                                </select>
+                            </div>
+                            <div class="breathing-setting">
+                                <label>Exhale Duration</label>
+                                <select id="exhaleTime">
+                                    <option value="6">6 seconds</option>
+                                    <option value="8" selected>8 seconds</option>
+                                    <option value="10">10 seconds</option>
+                                </select>
+                            </div>
+                        </div>
+                        
+                        <div class="breathing-info">
+                            <h3>Benefits of Breathing Exercises</h3>
+                            <ul>
+                                <li>Reduces stress and anxiety</li>
+                                <li>Improves focus and concentration</li>
+                                <li>Lowers blood pressure</li>
+                                <li>Promotes better sleep</li>
+                                <li>Enhances emotional regulation</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Meditation Tab -->
+                <div class="wellness-content" data-wellness-content="meditation">
+                    <div class="meditation-section">
+                        <h2>Guided Meditation</h2>
+                        <p class="meditation-intro">Choose from our collection of guided meditation sessions</p>
+                        
+                        <div class="meditation-grid" id="meditationGrid">
+                            <!-- Meditation cards will be populated here -->
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Resources Tab -->
+                <div class="wellness-content" data-wellness-content="resources">
+                    <div class="resources-section">
+                        <h2>Mental Health Resources</h2>
+                        <p class="resources-intro">Curated articles and resources for your wellbeing</p>
+                        
+                        <div class="resources-grid" id="resourcesGrid">
+                            <!-- Resource cards will be populated here -->
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Music Tab -->
+                <div class="wellness-content" data-wellness-content="music">
+                    <div class="music-section">
+                        <h2>Relaxation Sounds</h2>
+                        <p class="music-intro">Ambient sounds to help you relax and focus</p>
+                        
+                        <div class="music-player" id="musicPlayer">
+                            <!-- Music player will be populated here -->
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Toast Notification -->
+    <div id="toast" class="toast" 
+         role="alert" 
+         aria-live="assertive" 
+         aria-atomic="true">
+        <div class="toast-content">
+            <i class="fas fa-check-circle" aria-hidden="true"></i>
+            <span id="toastMessage">Mood saved successfully!</span>
+        </div>
+    </div>
+
+    <!-- Onboarding Tour -->
+    <div id="onboardingOverlay" class="onboarding-overlay" style="display: none;">
+        <div class="onboarding-spotlight"></div>
+        <div class="onboarding-tooltip">
+            <div class="onboarding-header">
+                <h3 id="onboardingTitle">Welcome to MoodTracker Pro!</h3>
+                <button class="onboarding-close" id="onboardingClose" aria-label="Close tour">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+            <div class="onboarding-body">
+                <p id="onboardingMessage">Let's take a quick tour to get you started!</p>
+            </div>
+            <div class="onboarding-footer">
+                <div class="onboarding-progress">
+                    <span id="onboardingStep">1 / 6</span>
+                </div>
+                <div class="onboarding-actions">
+                    <button class="btn-secondary" id="onboardingSkip">Skip Tour</button>
+                    <button class="btn-secondary" id="onboardingPrev" style="display: none;">Previous</button>
+                    <button class="btn-primary" id="onboardingNext">Next</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Mobile Bottom Navigation -->
+    <nav class="mobile-bottom-nav" id="mobileBottomNav" role="navigation" aria-label="Mobile navigation">
+        <button class="mobile-nav-item" data-section="dashboard" 
+                aria-label="Dashboard - View your mood statistics" 
+                aria-current="page">
+            <i class="fas fa-home" aria-hidden="true"></i>
+            <span>Home</span>
+        </button>
+        <button class="mobile-nav-item" data-section="tracker" 
+                aria-label="Track Mood - Record new mood entry">
+            <i class="fas fa-plus-circle" aria-hidden="true"></i>
+            <span>Track</span>
+        </button>
+        <button class="mobile-nav-item" data-section="analytics" 
+                aria-label="Analytics - View detailed analytics">
+            <i class="fas fa-chart-line" aria-hidden="true"></i>
+            <span>Stats</span>
+        </button>
+        <button class="mobile-nav-item" data-section="insights" 
+                aria-label="Insights - View AI-powered insights">
+            <i class="fas fa-lightbulb" aria-hidden="true"></i>
+            <span>Insights</span>
+        </button>
+        <button class="mobile-nav-item" data-section="wellness" 
+                aria-label="Wellness - Access mental health resources">
+            <i class="fas fa-spa" aria-hidden="true"></i>
+            <span>Wellness</span>
+        </button>
+    </nav>
+
+    <!-- Pull to Refresh Indicator -->
+    <div class="pull-to-refresh" id="pullToRefresh">
+        <div class="pull-to-refresh-spinner">
+            <i class="fas fa-sync-alt"></i>
+        </div>
+        <span class="pull-to-refresh-text">Pull to refresh</span>
+    </div>
+
+    <!-- AI Chat Assistant -->
+    <div class="ai-chat-container" id="aiChatContainer">
+        <div class="ai-chat-window" id="aiChatWindow">
+            <div class="ai-chat-header">
+                <div class="ai-chat-header-left">
+                    <div class="ai-avatar">
+                        <i class="fas fa-robot"></i>
+                    </div>
+                    <div class="ai-info">
+                        <h3 class="ai-name" data-i18n="aiAssistant">AI Assistant</h3>
+                        <span class="ai-status online" data-i18n="aiOnline">Online</span>
+                    </div>
+                </div>
+                <div class="ai-chat-header-right">
+                    <button class="ai-btn-icon" id="aiResetBtn" aria-label="Reset conversation" title="Clear conversation">
+                        <i class="fas fa-redo-alt"></i>
+                    </button>
+                    <button class="ai-btn-icon" id="aiMinimizeBtn" aria-label="Minimize chat">
+                        <i class="fas fa-minus"></i>
+                    </button>
+                    <button class="ai-btn-icon" id="aiCloseBtn" aria-label="Close chat">
+                        <i class="fas fa-times"></i>
+                    </button>
+                </div>
+            </div>
+
+            <div class="ai-chat-body" id="aiChatBody">
+                <div class="ai-welcome-message">
+                    <div class="ai-avatar-large">
+                        <i class="fas fa-robot"></i>
+                    </div>
+                    <h3 data-i18n="aiWelcomeTitle">Hi! I'm your AI Mood Assistant</h3>
+                    <p data-i18n="aiWelcomeDesc">I'm here to help you understand your emotions and provide personalized wellness suggestions.</p>
+                    <div class="ai-quick-actions">
+                        <button class="ai-quick-btn" data-action="analyze">
+                            <i class="fas fa-brain"></i>
+                            <span data-i18n="aiAnalyzeMood">Analyze My Mood</span>
+                        </button>
+                        <button class="ai-quick-btn" data-action="suggest-tags">
+                            <i class="fas fa-tags"></i>
+                            <span data-i18n="aiSuggestTags">Suggest Tags</span>
+                        </button>
+                        <button class="ai-quick-btn" data-action="wellness-tip">
+                            <i class="fas fa-heart"></i>
+                            <span data-i18n="aiWellnessTip">Wellness Tips</span>
+                        </button>
+                        <button class="ai-quick-btn" data-action="insights">
+                            <i class="fas fa-lightbulb"></i>
+                            <span data-i18n="aiInsights">Get Insights</span>
+                        </button>
+                    </div>
+                </div>
+                <div class="ai-messages" id="aiMessages">
+                    <!-- Messages will be inserted here -->
+                </div>
+            </div>
+
+            <div class="ai-chat-footer">
+                <div class="ai-typing-indicator" id="aiTypingIndicator" style="display: none;">
+                    <span></span><span></span><span></span>
+                </div>
+                <div class="ai-input-container">
+                    <textarea 
+                        id="aiChatInput" 
+                        class="ai-input" 
+                        data-i18n-placeholder="aiInputPlaceholder"
+                        placeholder="Ask me anything about your mood..."
+                        rows="1"
+                        aria-label="Chat with AI assistant"></textarea>
+                    <button class="ai-send-btn" id="aiSendBtn" aria-label="Send message">
+                        <i class="fas fa-paper-plane"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Offline Cache Management Panel -->
+    <div id="offlineCachePanel" class="modal-overlay" style="display: none;">
+        <div class="modal-content cache-modal">
+            <div class="modal-header">
+                <h2><i class="fas fa-wifi"></i> Offline & Cache Management</h2>
+                <button class="modal-close" onclick="document.getElementById('offlineCachePanel').style.display='none'">&times;</button>
+            </div>
+            <div class="modal-body">
+                <!-- Cache Statistics -->
+                <div class="cache-info-panel">
+                    <h3><i class="fas fa-chart-bar"></i> Storage Statistics</h3>
+                    <div class="cache-stats">
+                        <div class="cache-stat">
+                            <div class="cache-stat-label">Cache Size</div>
+                            <div class="cache-stat-value" id="cacheSizeValue">--</div>
+                        </div>
+                        <div class="cache-stat">
+                            <div class="cache-stat-label">Storage Used</div>
+                            <div class="cache-stat-value" id="storageUsedValue">--</div>
+                        </div>
+                        <div class="cache-stat">
+                            <div class="cache-stat-label">Quota Available</div>
+                            <div class="cache-stat-value" id="quotaValue">--</div>
+                        </div>
+                        <div class="cache-stat">
+                            <div class="cache-stat-label">Offline Entries</div>
+                            <div class="cache-stat-value" id="offlineEntriesValue">--</div>
+                        </div>
+                    </div>
+                    <div class="cache-progress">
+                        <div class="cache-progress-bar" id="cacheProgressBar" style="width: 0%"></div>
+                    </div>
+                    <p style="text-align: center; color: #999; font-size: 13px; margin-top: 8px;">
+                        <span id="storagePercentText">0%</span> of storage used
+                    </p>
+                </div>
+
+                <!-- Offline Status -->
+                <div class="cache-info-panel" style="margin-top: 20px;">
+                    <h3><i class="fas fa-signal"></i> Connection Status</h3>
+                    <div style="display: flex; align-items: center; gap: 12px; padding: 16px; background: #0a0a0a; border-radius: 8px;">
+                        <i class="fas fa-circle" id="connectionStatusIcon" style="font-size: 12px;"></i>
+                        <span id="connectionStatusText" style="font-weight: 600;">Checking...</span>
+                    </div>
+                    <div id="offlineQueueInfo" style="margin-top: 12px; padding: 12px; background: #0a0a0a; border-radius: 8px; display: none;">
+                        <i class="fas fa-clock" style="color: #ffc107;"></i>
+                        <span id="queuedItemsText" style="margin-left: 8px;">0 items waiting to sync</span>
+                    </div>
+                </div>
+
+                <!-- Cache Actions -->
+                <div class="cache-info-panel" style="margin-top: 20px;">
+                    <h3><i class="fas fa-tools"></i> Cache Management</h3>
+                    <div class="cache-actions">
+                        <button onclick="refreshCacheStats()">
+                            <i class="fas fa-sync-alt"></i>
+                            Refresh Stats
+                        </button>
+                        <button onclick="clearAppCache()">
+                            <i class="fas fa-trash"></i>
+                            Clear Cache
+                        </button>
+                        <button onclick="forceSyncOfflineData()">
+                            <i class="fas fa-cloud-upload-alt"></i>
+                            Force Sync
+                        </button>
+                        <button onclick="exportOfflineData()">
+                            <i class="fas fa-download"></i>
+                            Export Data
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Service Worker Status -->
+                <div class="cache-info-panel" style="margin-top: 20px;">
+                    <h3><i class="fas fa-cog"></i> Service Worker</h3>
+                    <div style="padding: 16px; background: #0a0a0a; border-radius: 8px;">
+                        <div style="display: flex; justify-content: space-between; margin-bottom: 8px;">
+                            <span style="color: #999;">Status:</span>
+                            <span id="swStatus" style="color: #00ff88; font-weight: 600;">--</span>
+                        </div>
+                        <div style="display: flex; justify-content: space-between;">
+                            <span style="color: #999;">Version:</span>
+                            <span id="swVersion" style="color: #00ff88; font-weight: 600;">--</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- AI Chat Toggle Button -->
+    <button class="ai-chat-toggle" id="aiChatToggle" aria-label="Open AI chat assistant">
+        <i class="fas fa-robot"></i>
+        <span class="ai-notification-badge" id="aiNotificationBadge" style="display: none;">1</span>
+    </button>
+
+    <!-- Scripts -->
+    <script src="wellness-tips.js"></script>
+    <script src="help-panels.js"></script>
+    <script src="indexeddb-storage.js"></script>
+    <script src="offline-support.js"></script>
+    <script src="cache-management.js"></script>
+    <script src="script.js?v=2025100402"></script>
+    
+    <!-- Service Worker Registration -->
+    <script>
+        // Register Service Worker for offline support
+        if ('serviceWorker' in navigator) {
+            window.addEventListener('load', () => {
+                navigator.serviceWorker.register('./sw.js')
+                    .then(registration => {
+                        console.log('✅ Service Worker registered successfully:', registration.scope);
+                        
+                        // Check for updates
+                        registration.addEventListener('updatefound', () => {
+                            const newWorker = registration.installing;
+                            console.log('🔄 New Service Worker installing...');
+                            
+                            newWorker.addEventListener('statechange', () => {
+                                if (newWorker.state === 'installed' && navigator.serviceWorker.controller) {
+                                    // New version available
+                                    showUpdateNotification();
+                                }
+                            });
+                        });
+                    })
+                    .catch(error => {
+                        console.error('❌ Service Worker registration failed:', error);
+                    });
+            });
+        } else {
+            console.warn('⚠️ Service Workers are not supported in this browser');
+        }
+        
+        // Show update notification
+        function showUpdateNotification() {
+            const notification = document.createElement('div');
+            notification.className = 'update-notification';
+            notification.innerHTML = `
+                <div class="update-content">
+                    <i class="fas fa-sync-alt"></i>
+                    <span>New version available!</span>
+                    <button onclick="window.location.reload()" class="btn-update">Update</button>
+                    <button onclick="this.parentElement.parentElement.remove()" class="btn-dismiss">×</button>
+                </div>
+            `;
+            document.body.appendChild(notification);
+        }
+    </script>
+</body>
+</html>

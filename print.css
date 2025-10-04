@@ -1,0 +1,350 @@
+/* ==================== PRINT OPTIMIZATION STYLES ==================== */
+
+@media print {
+    /* Reset and basic print styles */
+    * {
+        -webkit-print-color-adjust: exact !important;
+        print-color-adjust: exact !important;
+    }
+    
+    /* Hide non-essential elements */
+    .header,
+    .mobile-bottom-nav,
+    .pull-to-refresh,
+    .toast,
+    .modal-overlay,
+    .export-dropdown,
+    .personal-dropdown,
+    .data-actions,
+    .actions-toolbar,
+    button:not(.mood-btn):not(.tag-btn),
+    .entry-actions,
+    .nav-links {
+        display: none !important;
+    }
+    
+    /* Page setup */
+    @page {
+        size: A4;
+        margin: 1.5cm;
+    }
+    
+    body {
+        background: white !important;
+        color: #000 !important;
+        font-size: 12pt;
+        line-height: 1.5;
+    }
+    
+    .main {
+        padding: 0 !important;
+        margin: 0 !important;
+    }
+    
+    /* Section styling */
+    .section {
+        page-break-inside: avoid;
+        margin-bottom: 20pt;
+    }
+    
+    .section-header h1 {
+        color: #000 !important;
+        font-size: 24pt;
+        margin-bottom: 10pt;
+        border-bottom: 2pt solid #00ff88;
+        padding-bottom: 8pt;
+    }
+    
+    .section-header p {
+        color: #333 !important;
+        font-size: 11pt;
+    }
+    
+    /* Stats Grid */
+    .stats-grid {
+        display: grid;
+        grid-template-columns: repeat(4, 1fr);
+        gap: 10pt;
+        margin-bottom: 20pt;
+        page-break-inside: avoid;
+    }
+    
+    .stat-card {
+        background: #f5f5f5 !important;
+        border: 1pt solid #ddd !important;
+        border-radius: 4pt;
+        padding: 12pt;
+        page-break-inside: avoid;
+    }
+    
+    .stat-icon {
+        display: none;
+    }
+    
+    .stat-value {
+        font-size: 20pt !important;
+        font-weight: bold;
+        color: #00a855 !important;
+        margin-bottom: 4pt;
+    }
+    
+    .stat-label {
+        font-size: 10pt;
+        color: #666 !important;
+    }
+    
+    /* Charts */
+    .chart-container,
+    .chart-panel {
+        page-break-inside: avoid;
+        background: white !important;
+        border: 1pt solid #ddd !important;
+        padding: 12pt;
+        margin-bottom: 15pt;
+    }
+    
+    canvas {
+        max-height: 250px !important;
+    }
+    
+    /* Entries */
+    .entries-section {
+        background: white !important;
+        border: 1pt solid #ddd !important;
+        padding: 12pt;
+    }
+    
+    .entry-item {
+        background: #f9f9f9 !important;
+        border: 1pt solid #e0e0e0 !important;
+        border-radius: 4pt;
+        padding: 10pt;
+        margin-bottom: 10pt;
+        page-break-inside: avoid;
+    }
+    
+    .entry-header {
+        border-bottom: 1pt solid #e0e0e0;
+        padding-bottom: 6pt;
+        margin-bottom: 6pt;
+    }
+    
+    .entry-mood {
+        font-size: 14pt;
+        font-weight: bold;
+        color: #000 !important;
+    }
+    
+    .entry-date {
+        font-size: 9pt;
+        color: #666 !important;
+    }
+    
+    .entry-note {
+        color: #333 !important;
+        font-size: 10pt;
+        line-height: 1.4;
+    }
+    
+    .entry-tags {
+        margin-top: 6pt;
+        display: flex;
+        gap: 4pt;
+        flex-wrap: wrap;
+    }
+    
+    .entry-tag {
+        background: #e8f5e9 !important;
+        color: #00a855 !important;
+        border: 1pt solid #a5d6a7 !important;
+        padding: 2pt 8pt;
+        border-radius: 10pt;
+        font-size: 9pt;
+    }
+    
+    /* Mood Distribution */
+    .mood-distribution-chart,
+    .mood-trend-chart {
+        page-break-inside: avoid;
+    }
+    
+    /* Insights */
+    .insight-card {
+        background: #f5f5f5 !important;
+        border: 1pt solid #ddd !important;
+        border-left: 3pt solid #00ff88 !important;
+        padding: 10pt;
+        margin-bottom: 10pt;
+        page-break-inside: avoid;
+    }
+    
+    .insight-title {
+        color: #000 !important;
+        font-size: 11pt;
+        font-weight: bold;
+        margin-bottom: 6pt;
+    }
+    
+    .insight-content {
+        color: #333 !important;
+        font-size: 10pt;
+    }
+    
+    .insight-icon {
+        display: none;
+    }
+    
+    /* Wellness Tips */
+    .wellness-tip {
+        background: #f0f8ff !important;
+        border: 1pt solid #b3d9ff !important;
+        border-radius: 4pt;
+        padding: 10pt;
+        margin-bottom: 10pt;
+        page-break-inside: avoid;
+    }
+    
+    /* Heatmap */
+    .heatmap-container {
+        page-break-inside: avoid;
+        background: white !important;
+        padding: 10pt;
+    }
+    
+    .heatmap-day {
+        border: 1pt solid #e0e0e0 !important;
+    }
+    
+    /* Typography */
+    h1, h2, h3, h4 {
+        color: #000 !important;
+        page-break-after: avoid;
+    }
+    
+    h2 {
+        font-size: 18pt;
+        margin-top: 15pt;
+        margin-bottom: 10pt;
+    }
+    
+    h3 {
+        font-size: 14pt;
+        margin-top: 12pt;
+        margin-bottom: 8pt;
+    }
+    
+    p {
+        orphans: 3;
+        widows: 3;
+    }
+    
+    /* Links */
+    a {
+        color: #000 !important;
+        text-decoration: underline;
+    }
+    
+    a[href]:after {
+        content: " (" attr(href) ")";
+        font-size: 9pt;
+        color: #666;
+    }
+    
+    /* Print footer */
+    .section:last-child::after {
+        content: "Generated by MoodTracker Pro - " counter(page);
+        display: block;
+        text-align: center;
+        margin-top: 20pt;
+        padding-top: 10pt;
+        border-top: 1pt solid #ddd;
+        font-size: 9pt;
+        color: #666;
+    }
+    
+    /* Page breaks */
+    .dashboard-charts {
+        page-break-before: auto;
+    }
+    
+    .entries-section {
+        page-break-before: auto;
+    }
+    
+    .section#analytics {
+        page-break-before: always;
+    }
+    
+    .section#insights {
+        page-break-before: always;
+    }
+    
+    /* Avoid breaks inside these */
+    .stat-card,
+    .entry-item,
+    .insight-card,
+    .wellness-tip {
+        page-break-inside: avoid;
+    }
+    
+    /* Table styles (if any) */
+    table {
+        border-collapse: collapse;
+        width: 100%;
+        page-break-inside: auto;
+    }
+    
+    tr {
+        page-break-inside: avoid;
+        page-break-after: auto;
+    }
+    
+    thead {
+        display: table-header-group;
+    }
+    
+    tfoot {
+        display: table-footer-group;
+    }
+    
+    th {
+        background: #f5f5f5 !important;
+        border: 1pt solid #ddd;
+        padding: 8pt;
+        text-align: left;
+        font-weight: bold;
+    }
+    
+    td {
+        border: 1pt solid #ddd;
+        padding: 6pt;
+    }
+    
+    /* Remove shadows and effects */
+    * {
+        box-shadow: none !important;
+        text-shadow: none !important;
+    }
+    
+    /* Optimize images */
+    img {
+        max-width: 100%;
+        page-break-inside: avoid;
+    }
+    
+    /* Container adjustments */
+    .container {
+        width: 100%;
+        max-width: 100%;
+        padding: 0;
+        margin: 0;
+    }
+    
+    /* Remove animations */
+    * {
+        animation: none !important;
+        transition: none !important;
+    }
+}
+
+/* ==================== END PRINT OPTIMIZATION STYLES ==================== */
