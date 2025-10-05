@@ -172,21 +172,27 @@
       "short_name": "Mood",
       "description": "Quick mood logging widget",
       "tag": "mood-widget",
-      "template": "mood-widget",
-      "ms_ac_template": "mood-widget-template",
-      "data": "/?widget=mood",
+      "url": "/index.html?widget=mood",
+      "data": "/widget-data.json",
       "type": "application/json",
       "screenshots": [
         {
-          "src": "./icon-512.svg",
+          "src": "./icon-512.png",
           "sizes": "512x512",
+          "type": "image/png",
           "label": "Mood Widget Screenshot"
         }
       ],
       "icons": [
         {
-          "src": "./icon-512.svg",
-          "sizes": "512x512"
+          "src": "./icon-192.png",
+          "sizes": "192x192",
+          "type": "image/png"
+        },
+        {
+          "src": "./icon-512.png",
+          "sizes": "512x512",
+          "type": "image/png"
         }
       ],
       "auth": false,
