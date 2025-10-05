@@ -12624,36 +12624,71 @@ class AIAssistant {
             return;
         }
         
-        // Clear messages container
-        if (this.messagesContainer) {
-            this.messagesContainer.innerHTML = '';
+        console.log('🔄 Starting conversation reset...');
+        
+        try {
+            // Clear messages container
+            if (this.messagesContainer) {
+                this.messagesContainer.innerHTML = '';
+                console.log('✅ Messages container cleared');
+            } else {
+                console.warn('⚠️ Messages container not found');
+            }
+            
+            // Clear conversation history
+            this.conversationHistory = [];
+            
+            // Save empty history
+            this.saveConversationHistory();
+            console.log('✅ Conversation history cleared');
+            
+            // Show welcome message with avatar and quick actions
+            // Try multiple methods to ensure compatibility
+            this.showWelcomeMessage();
+            
+            // Alternative method if querySelector fails
+            setTimeout(() => {
+                const welcomeMessage = document.querySelector('.ai-welcome-message');
+                if (welcomeMessage) {
+                    welcomeMessage.style.display = 'block';
+                    console.log('✅ Welcome message displayed');
+                } else {
+                    console.warn('⚠️ Welcome message element not found, trying alternative...');
+                    // Try with getElementById as fallback
+                    const chatBody = document.getElementById('aiChatBody');
+                    if (chatBody) {
+                        const welcomeInBody = chatBody.querySelector('.ai-welcome-message');
+                        if (welcomeInBody) {
+                            welcomeInBody.style.display = 'block';
+                            console.log('✅ Welcome message displayed (alternative method)');
+                        }
+                    }
+                }
+            }, 100);
+            
+            // Clear input
+            if (this.chatInput) {
+                this.chatInput.value = '';
+                this.autoResizeInput();
+                console.log('✅ Input cleared');
+            } else {
+                console.warn('⚠️ Chat input not found');
+            }
+            
+            // Scroll to top to show welcome message
+            const chatBody = document.getElementById('aiChatBody');
+            if (chatBody) {
+                chatBody.scrollTop = 0;
+                console.log('✅ Scrolled to top');
+            } else {
+                console.warn('⚠️ Chat body not found for scrolling');
+            }
+            
+            console.log('✅ AI conversation reset completed - Welcome screen restored');
+        } catch (error) {
+            console.error('❌ Error during conversation reset:', error);
+            alert('Failed to reset conversation. Please refresh the page and try again.');
         }
-        
-        // Clear conversation history
-        this.conversationHistory = [];
-        
-        // Save empty history
-        this.saveConversationHistory();
-        
-        // Show welcome message with avatar and quick actions
-        const welcomeMessage = document.querySelector('.ai-welcome-message');
-        if (welcomeMessage) {
-            welcomeMessage.style.display = 'block';
-        }
-        
-        // Clear input
-        if (this.chatInput) {
-            this.chatInput.value = '';
-            this.autoResizeInput();
-        }
-        
-        // Scroll to top to show welcome message
-        const chatBody = document.getElementById('aiChatBody');
-        if (chatBody) {
-            chatBody.scrollTop = 0;
-        }
-        
-        console.log('✅ AI conversation reset - Welcome screen restored');
     }
     
     autoResizeInput() {
@@ -13017,30 +13052,80 @@ class AIAssistant {
     
     saveConversationHistory() {
         try {
-            localStorage.setItem('ai_conversation_history', JSON.stringify(this.conversationHistory));
+            const data = JSON.stringify(this.conversationHistory);
+            localStorage.setItem('ai_conversation_history', data);
+            console.log('💾 Conversation history saved:', this.conversationHistory.length, 'messages');
         } catch (e) {
-            console.error('Failed to save conversation history:', e);
+            console.error('❌ Failed to save conversation history:', e);
+            // Try sessionStorage as fallback
+            try {
+                sessionStorage.setItem('ai_conversation_history', JSON.stringify(this.conversationHistory));
+                console.log('💾 Saved to sessionStorage instead');
+            } catch (e2) {
+                console.error('❌ SessionStorage also failed:', e2);
+                // Store in memory only
+                console.warn('⚠️ Using in-memory storage only (data will be lost on refresh)');
+            }
         }
     }
     
     loadConversationHistory() {
         try {
-            const saved = localStorage.getItem('ai_conversation_history');
-            if (saved) {
-                this.conversationHistory = JSON.parse(saved);
-                // Restore messages
-                this.conversationHistory.forEach(msg => {
-                    if (msg.sender && msg.content) {
-                        this.addMessageToDOM(msg.content, msg.sender);
-                    }
-                });
-                if (this.conversationHistory.length > 0) {
-                    const welcomeMsg = document.querySelector('.ai-welcome-message');
-                    if (welcomeMsg) welcomeMsg.style.display = 'none';
+            // Try localStorage first
+            let saved = null;
+            try {
+                saved = localStorage.getItem('ai_conversation_history');
+            } catch (e) {
+                console.warn('⚠️ localStorage not accessible, trying sessionStorage...');
+                try {
+                    saved = sessionStorage.getItem('ai_conversation_history');
+                } catch (e2) {
+                    console.error('❌ Both localStorage and sessionStorage failed');
                 }
             }
+            
+            if (saved) {
+                try {
+                    this.conversationHistory = JSON.parse(saved);
+                    console.log('📥 Loaded conversation history:', this.conversationHistory.length, 'messages');
+                    
+                    // Restore messages
+                    if (this.conversationHistory.length > 0) {
+                        this.conversationHistory.forEach(msg => {
+                            if (msg.sender && msg.content) {
+                                this.addMessageToDOM(msg.content, msg.sender);
+                            }
+                        });
+                        
+                        // Hide welcome message
+                        setTimeout(() => {
+                            const welcomeMsg = document.querySelector('.ai-welcome-message');
+                            if (welcomeMsg) {
+                                welcomeMsg.style.display = 'none';
+                                console.log('✅ Welcome message hidden (history exists)');
+                            }
+                        }, 100);
+                    } else {
+                        console.log('✅ No conversation history, showing welcome message');
+                    }
+                } catch (parseError) {
+                    console.error('❌ Failed to parse conversation history:', parseError);
+                    // Clear corrupted data
+                    try {
+                        localStorage.removeItem('ai_conversation_history');
+                        sessionStorage.removeItem('ai_conversation_history');
+                    } catch (e) {
+                        console.error('❌ Failed to clear corrupted data:', e);
+                    }
+                    this.conversationHistory = [];
+                }
+            } else {
+                console.log('ℹ️ No saved conversation history');
+                this.conversationHistory = [];
+            }
         } catch (e) {
-            console.error('Failed to load conversation history:', e);
+            console.error('❌ Failed to load conversation history:', e);
+            this.conversationHistory = [];
         }
     }
     
