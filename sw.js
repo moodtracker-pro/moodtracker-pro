@@ -17,6 +17,7 @@ const CORE_ASSETS = [
     './offline-support.js',
     './cache-management.js',
     './manifest.json',
+    './widget-data.json',
     './icon-192.png',
     './icon-512.png',
     './icon-192-maskable.png',
