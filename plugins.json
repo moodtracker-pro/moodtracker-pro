@@ -1,0 +1,62 @@
+[
+  {
+    "id": "weather-integration",
+    "name": "Weather Integration",
+    "author": "MoodTracker Team",
+    "version": "1.0.0",
+    "description": "Automatically record weather conditions with mood entries",
+    "category": "integration",
+    "icon": "fas fa-cloud-sun",
+    "repository": "https://github.com/moodtracker-pro/moodtracker-pro-plugins",
+    "main": "https://raw.githubusercontent.com/moodtracker-pro/moodtracker-pro-plugins/main/example-plugins/weather-plugin.js",
+    "downloads": 125,
+    "rating": 4.5,
+    "verified": true,
+    "tags": ["weather", "integration", "automation"],
+    "screenshots": [
+      "https://raw.githubusercontent.com/moodtracker-pro/moodtracker-pro-plugins/main/assets/screenshots/weather-plugin.svg"
+    ],
+    "documentation": "https://github.com/moodtracker-pro/moodtracker-pro-plugins/blob/main/docs/PLUGIN-USAGE-GUIDE.md",
+    "changelog": "Initial release with automatic weather tracking"
+  },
+  {
+    "id": "export-reminder",
+    "name": "Export Reminder",
+    "author": "MoodTracker Team",
+    "version": "1.0.0",
+    "description": "Regular reminders to export and backup your data",
+    "category": "utility",
+    "icon": "fas fa-cloud-upload-alt",
+    "repository": "https://github.com/moodtracker-pro/moodtracker-pro-plugins",
+    "main": "https://raw.githubusercontent.com/moodtracker-pro/moodtracker-pro-plugins/main/example-plugins/export-reminder-plugin.js",
+    "downloads": 156,
+    "rating": 4.6,
+    "verified": true,
+    "tags": ["backup", "export", "utility", "data-protection"],
+    "screenshots": [
+      "https://raw.githubusercontent.com/moodtracker-pro/moodtracker-pro-plugins/main/assets/screenshots/export-reminder.svg"
+    ],
+    "documentation": "https://github.com/moodtracker-pro/moodtracker-pro-plugins/blob/main/docs/PLUGIN-USAGE-GUIDE.md",
+    "changelog": "Initial release with customizable backup reminders"
+  },
+  {
+    "id": "daily-quote",
+    "name": "Daily Quote",
+    "author": "MoodTracker Team",
+    "version": "1.0.0",
+    "description": "Daily inspirational quotes to boost your mood",
+    "category": "wellness",
+    "icon": "fas fa-quote-left",
+    "repository": "https://github.com/moodtracker-pro/moodtracker-pro-plugins",
+    "main": "https://raw.githubusercontent.com/moodtracker-pro/moodtracker-pro-plugins/main/example-plugins/daily-quote-plugin.js",
+    "downloads": 203,
+    "rating": 4.8,
+    "verified": true,
+    "tags": ["quotes", "motivation", "wellness", "inspiration"],
+    "screenshots": [
+      "https://raw.githubusercontent.com/moodtracker-pro/moodtracker-pro-plugins/main/assets/screenshots/daily-quote.svg"
+    ],
+    "documentation": "https://github.com/moodtracker-pro/moodtracker-pro-plugins/blob/main/docs/PLUGIN-USAGE-GUIDE.md",
+    "changelog": "Initial release with 100+ curated quotes"
+  }
+]
