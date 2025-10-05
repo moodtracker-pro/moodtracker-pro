@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>MoodTracker Pro - 企业级情绪追踪系统</title>
+    <title>MoodTracker Pro - 情绪追踪系统</title>
     
     <!-- PWA Manifest -->
     <link rel="manifest" href="./manifest.json">
@@ -31,6 +31,8 @@
     <meta property="og:image" content="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 512 512'%3E%3Crect width='512' height='512' fill='%230a0a0a' rx='80'/%3E%3Ctext x='256' y='350' font-size='280' text-anchor='middle' fill='%2300ff88'%3E😊%3C/text%3E%3C/svg%3E">
     <link rel="stylesheet" href="styles.css?v=2025100401">
     <link rel="stylesheet" href="mobile-responsive.css">
+    <link rel="stylesheet" href="mobile-enhancements.css">
+    <link rel="stylesheet" href="mobile-theme.css">
     <link rel="stylesheet" href="ai-assistant.css">
     <link rel="stylesheet" href="keyboard-shortcuts.css">
     <link rel="stylesheet" href="accessibility.css">
@@ -1462,7 +1464,29 @@
     <script src="indexeddb-storage.js"></script>
     <script src="offline-support.js"></script>
     <script src="cache-management.js"></script>
+    <script src="mobile-performance.js"></script>
+    <script src="mobile-gestures.js"></script>
+    <script src="theme-switcher.js"></script>
     <script src="script.js?v=2025100402"></script>
+    
+    <!-- Plugins -->
+    <script src="https://raw.githubusercontent.com/moodtracker-pro/weather-plugin/refs/heads/main/weather-plugin.js"></script>
+    
+    <!-- Plugin Initialization -->
+    <script>
+        // Wait for MoodTrackerAPI to be ready before loading plugins
+        window.addEventListener('load', () => {
+            console.log('🔌 Plugin system ready');
+            console.log('📦 Loaded plugins:', window.MoodTrackerAPI?.plugins?.length || 0);
+            
+            // Log plugin information
+            if (window.MoodTrackerAPI && window.MoodTrackerAPI.plugins) {
+                window.MoodTrackerAPI.plugins.forEach(plugin => {
+                    console.log(`  ✅ ${plugin.name} v${plugin.version}`);
+                });
+            }
+        });
+    </script>
     
     <!-- Service Worker Registration -->
     <script>
