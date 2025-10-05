@@ -1463,6 +1463,87 @@
     <script src="offline-support.js"></script>
     <script src="cache-management.js"></script>
     <script src="script.js?v=2025100402"></script>
+        
+    <!-- 加载 GitHub 插件 -->
+    <script src="https://raw.githubusercontent.com/moodtracker-pro/moodtracker-pro-plugins/main/example-plugins/weather-plugin.js"></script>
+    <script src="https://raw.githubusercontent.com/moodtracker-pro/moodtracker-pro-plugins/main/example-plugins/export-reminder-plugin.js"></script>
+    <script src="https://raw.githubusercontent.com/moodtracker-pro/moodtracker-pro-plugins/main/example-plugins/daily-quote-plugin.js"></script>
+    
+    <!-- 插件管理器初始化 -->
+    <script>
+    document.addEventListener('DOMContentLoaded', () => {
+        console.log('🔌 正在加载插件...');
+        
+        // 初始化插件系统
+        if (window.MoodTrackerPlugins && window.MoodTrackerPlugins.length > 0) {
+            window.MoodTrackerPlugins.forEach(plugin => {
+                try {
+                    if (plugin.init && typeof plugin.init === 'function') {
+                        // 创建插件 API（如果 script.js 中有实现）
+                        const pluginAPI = window.pluginAPI || createBasicPluginAPI();
+                        plugin.init(pluginAPI);
+                        console.log(`✅ 插件已加载: ${plugin.manifest?.name || '未知插件'}`);
+                    }
+                } catch (error) {
+                    console.error(`❌ 插件加载失败: ${plugin.manifest?.name || '未知'}`, error);
+                }
+            });
+            console.log(`✅ 所有插件已加载 (${window.MoodTrackerPlugins.length} 个)`);
+        } else {
+            console.log('ℹ️ 没有检测到插件');
+        }
+    });
+    
+    // 创建基础插件 API（如果主应用没有提供）
+    function createBasicPluginAPI() {
+        return {
+            // 数据访问
+            data: {
+                getMoodEntries: (filter) => {
+                    const entries = JSON.parse(localStorage.getItem('moodEntries') || '[]');
+                    return filter ? entries.filter(filter) : entries;
+                },
+                addMoodEntry: (entry) => {
+                    const entries = JSON.parse(localStorage.getItem('moodEntries') || '[]');
+                    entries.push(entry);
+                    localStorage.setItem('moodEntries', JSON.stringify(entries));
+                }
+            },
+            
+            // UI 操作
+            ui: {
+                showNotification: (message, type = 'info') => {
+                    console.log(`[${type.toUpperCase()}] ${message}`);
+                    // 可以在这里添加实际的通知 UI
+                },
+                showDialog: (title, content, buttons) => {
+                    alert(`${title}\n\n${content}`);
+                }
+            },
+            
+            // 事件系统
+            on: (event, callback) => {
+                document.addEventListener(`plugin:${event}`, callback);
+            },
+            emit: (event, data) => {
+                document.dispatchEvent(new CustomEvent(`plugin:${event}`, { detail: data }));
+            },
+            
+            // 存储
+            storage: {
+                set: (key, value) => localStorage.setItem(`plugin_${key}`, JSON.stringify(value)),
+                get: (key) => JSON.parse(localStorage.getItem(`plugin_${key}`) || 'null'),
+                remove: (key) => localStorage.removeItem(`plugin_${key}`)
+            },
+            
+            // 工具函数
+            utils: {
+                formatDate: (date) => new Date(date).toLocaleDateString('zh-CN'),
+                generateId: () => Date.now().toString(36) + Math.random().toString(36).substr(2)
+            }
+        };
+    }
+    </script>
     
     <!-- Service Worker Registration -->
     <script>
