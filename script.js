@@ -115,7 +115,7 @@ class MoodTracker {
         
         // Plugin System
         this.installedPlugins = JSON.parse(localStorage.getItem('installedPlugins') || '[]');
-        this.pluginRegistry = 'https://raw.githubusercontent.com/moodtracker-pro/moodtracker-pro-plugins/main/plugins.json';
+        this.pluginRegistry = 'https://raw.githubusercontent.com/moodtracker-pro/plugins/main/plugins.json';
         
         this.init();
     }
@@ -5564,39 +5564,53 @@ Today I'm grateful for:
                 description: 'Automatically record weather conditions with mood entries',
                 category: 'integration',
                 icon: 'fas fa-cloud-sun',
-                repository: 'https://github.com/moodtracker-pro/moodtracker-pro-plugins',
-                main: 'https://raw.githubusercontent.com/moodtracker-pro/moodtracker-pro-plugins/main/example-plugins/weather-plugin.js',
+                repository: 'https://github.com/moodtracker-pro/weather-plugin',
+                main: 'https://raw.githubusercontent.com/moodtracker-pro/weather-plugin/main/plugin.js',
                 downloads: 125,
                 rating: 4.5,
                 verified: true
             },
             {
-                id: 'export-reminder',
-                name: 'Export Reminder',
-                author: 'MoodTracker Team',
+                id: 'github-commits',
+                name: 'GitHub Commits',
+                author: 'GitHubDev',
                 version: '1.0.0',
-                description: 'Regular reminders to export and backup your data',
-                category: 'utility',
-                icon: 'fas fa-cloud-upload-alt',
-                repository: 'https://github.com/moodtracker-pro/moodtracker-pro-plugins',
-                main: 'https://raw.githubusercontent.com/moodtracker-pro/moodtracker-pro-plugins/main/example-plugins/export-reminder-plugin.js',
-                downloads: 156,
-                rating: 4.6,
-                verified: true
+                description: 'Track GitHub commits alongside your mood data',
+                category: 'integration',
+                icon: 'fab fa-github',
+                repository: 'https://github.com/community/github-commits-plugin',
+                main: 'https://cdn.example.com/github-plugin.js',
+                downloads: 89,
+                rating: 4.2,
+                verified: false
             },
             {
-                id: 'daily-quote',
-                name: 'Daily Quote',
-                author: 'MoodTracker Team',
+                id: 'advanced-charts',
+                name: 'Advanced Charts',
+                author: 'ChartsDev',
                 version: '1.0.0',
-                description: 'Daily inspirational quotes to boost your mood',
-                category: 'wellness',
-                icon: 'fas fa-quote-left',
-                repository: 'https://github.com/moodtracker-pro/moodtracker-pro-plugins',
-                main: 'https://raw.githubusercontent.com/moodtracker-pro/moodtracker-pro-plugins/main/example-plugins/daily-quote-plugin.js',
+                description: 'Add heatmaps, radar charts, and more visualization options',
+                category: 'analytics',
+                icon: 'fas fa-chart-pie',
+                repository: 'https://github.com/community/advanced-charts',
+                main: 'https://cdn.example.com/charts-plugin.js',
                 downloads: 203,
                 rating: 4.8,
                 verified: true
+            },
+            {
+                id: 'auto-backup',
+                name: 'Auto Backup',
+                author: 'BackupDev',
+                version: '1.0.0',
+                description: 'Automatically backup your data to cloud storage',
+                category: 'utility',
+                icon: 'fas fa-cloud-upload-alt',
+                repository: 'https://github.com/community/auto-backup',
+                main: 'https://cdn.example.com/backup-plugin.js',
+                downloads: 156,
+                rating: 4.6,
+                verified: false
             }
         ];
     }
