@@ -9,55 +9,55 @@
   "background_color": "#0a0a0a",
   "theme_color": "#00ff88",
   "orientation": "portrait-primary",
-  "scope": "./",
+  "scope": "/",
   "lang": "en-US",
   "dir": "ltr",
   "categories": ["health", "lifestyle", "productivity"],
   "icons": [
     {
-      "src": "./icon-192.png",
+      "src": "/icon-192.png",
       "sizes": "192x192",
       "type": "image/png",
       "purpose": "any"
     },
     {
-      "src": "./icon-512.png",
+      "src": "/icon-512.png",
       "sizes": "512x512",
       "type": "image/png",
       "purpose": "any"
     },
     {
-      "src": "./icon-192-maskable.png",
+      "src": "/icon-192-maskable.png",
       "sizes": "192x192",
       "type": "image/png",
       "purpose": "maskable"
     },
     {
-      "src": "./icon-512-maskable.png",
+      "src": "/icon-512-maskable.png",
       "sizes": "512x512",
       "type": "image/png",
       "purpose": "maskable"
     },
     {
-      "src": "./icon-192.svg",
+      "src": "/icon-192.svg",
       "sizes": "192x192",
       "type": "image/svg+xml",
       "purpose": "any"
     },
     {
-      "src": "./icon-512.svg",
+      "src": "/icon-512.svg",
       "sizes": "512x512",
       "type": "image/svg+xml",
       "purpose": "any"
     },
     {
-      "src": "./icon-192-maskable.svg",
+      "src": "/icon-192-maskable.svg",
       "sizes": "192x192",
       "type": "image/svg+xml",
       "purpose": "maskable"
     },
     {
-      "src": "./icon-512-maskable.svg",
+      "src": "/icon-512-maskable.svg",
       "sizes": "512x512",
       "type": "image/svg+xml",
       "purpose": "maskable"
@@ -65,28 +65,28 @@
   ],
   "screenshots": [
     {
-      "src": "./screenshot-mobile.png",
+      "src": "/screenshot-mobile.png",
       "sizes": "540x720",
       "type": "image/png",
       "form_factor": "narrow",
       "label": "Mobile dashboard view"
     },
     {
-      "src": "./screenshot-desktop.png",
+      "src": "/screenshot-desktop.png",
       "sizes": "1024x593",
       "type": "image/png",
       "form_factor": "wide",
       "label": "Desktop dashboard view"
     },
     {
-      "src": "./screenshot-mobile.svg",
+      "src": "/screenshot-mobile.svg",
       "sizes": "540x720",
       "type": "image/svg+xml",
       "form_factor": "narrow",
       "label": "Mobile dashboard view (SVG)"
     },
     {
-      "src": "./screenshot-desktop.svg",
+      "src": "/screenshot-desktop.svg",
       "sizes": "1024x593",
       "type": "image/svg+xml",
       "form_factor": "wide",
@@ -98,17 +98,17 @@
       "name": "Log Mood",
       "short_name": "Log",
       "description": "Quickly log your current mood",
-      "url": "./index.html?action=log"
+      "url": "/index.html?action=log"
     },
     {
       "name": "View Analytics",
       "short_name": "Analytics",
       "description": "View your mood analytics and insights",
-      "url": "./index.html?action=analytics"
+      "url": "/index.html?action=analytics"
     }
   ],
   "share_target": {
-    "action": "./index.html?share",
+    "action": "/index.html?share",
     "method": "GET",
     "params": {
       "title": "title",
@@ -150,7 +150,13 @@
   },
   "scope_extensions": [
     {
-      "origin": "*.moodtracker.app"
+      "origin": "https://moodtracker.app"
+    },
+    {
+      "origin": "https://www.moodtracker.app"
+    },
+    {
+      "origin": "https://api.moodtracker.app"
     }
   ],
   "related_applications": [
@@ -177,7 +183,7 @@
       "type": "application/json",
       "screenshots": [
         {
-          "src": "./icon-512.png",
+          "src": "/icon-512.png",
           "sizes": "512x512",
           "type": "image/png",
           "label": "Mood Widget Screenshot"
@@ -185,12 +191,12 @@
       ],
       "icons": [
         {
-          "src": "./icon-192.png",
+          "src": "/icon-192.png",
           "sizes": "192x192",
           "type": "image/png"
         },
         {
-          "src": "./icon-512.png",
+          "src": "/icon-512.png",
           "sizes": "512x512",
           "type": "image/png"
         }
