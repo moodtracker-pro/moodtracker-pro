@@ -1,8 +1,8 @@
 // MoodTracker Pro - Service Worker
-// Version 1.0.0
+// Version 1.1.0 - Enhanced Offline Support
 
-const CACHE_NAME = 'moodtracker-pro-v1.0.0';
-const RUNTIME_CACHE = 'moodtracker-runtime-v1.0.0';
+const CACHE_NAME = 'moodtracker-pro-v1.1.0';
+const RUNTIME_CACHE = 'moodtracker-runtime-v1.1.0';
 
 // Core files to cache immediately
 const CORE_ASSETS = [
@@ -108,7 +108,14 @@ self.addEventListener('fetch', (event) => {
     }
 
     // For HTML pages, use network first strategy
-    if (request.headers.get('Accept').includes('text/html')) {
+    const acceptHeader = request.headers.get('Accept');
+    if (acceptHeader && acceptHeader.includes('text/html')) {
+        event.respondWith(networkFirst(request));
+        return;
+    }
+
+    // For navigation requests (page loads)
+    if (request.mode === 'navigate') {
         event.respondWith(networkFirst(request));
         return;
     }
@@ -120,57 +127,98 @@ self.addEventListener('fetch', (event) => {
 // Cache First Strategy - Serve from cache, fallback to network
 async function cacheFirst(request) {
     try {
+        // Try cache first
         const cachedResponse = await caches.match(request);
         if (cachedResponse) {
-            console.log('[Service Worker] Serving from cache:', request.url);
+            console.log('[Service Worker] ✅ Serving from cache:', request.url);
             return cachedResponse;
         }
 
-        console.log('[Service Worker] Fetching from network:', request.url);
+        console.log('[Service Worker] 🌐 Fetching from network:', request.url);
         const networkResponse = await fetch(request);
         
         // Cache successful responses
         if (networkResponse && networkResponse.status === 200) {
             const cache = await caches.open(RUNTIME_CACHE);
-            cache.put(request, networkResponse.clone());
+            // Clone the response before caching
+            cache.put(request, networkResponse.clone()).catch(err => {
+                console.warn('[Service Worker] Failed to cache:', request.url, err);
+            });
         }
         
         return networkResponse;
     } catch (error) {
-        console.error('[Service Worker] Fetch failed:', error);
+        console.error('[Service Worker] ❌ Fetch failed:', error);
         
-        // Return offline page for navigation requests
-        if (request.mode === 'navigate') {
-            const cache = await caches.open(CACHE_NAME);
-            return cache.match('./index.html');
+        // Try cache again as fallback
+        const cachedResponse = await caches.match(request);
+        if (cachedResponse) {
+            console.log('[Service Worker] 🔄 Serving stale cache:', request.url);
+            return cachedResponse;
         }
         
-        throw error;
+        // Return offline page for navigation requests
+        if (request.mode === 'navigate' || request.destination === 'document') {
+            const cache = await caches.open(CACHE_NAME);
+            const offlinePage = await cache.match('./index.html');
+            if (offlinePage) {
+                return offlinePage;
+            }
+        }
+        
+        // Return a basic offline response
+        return new Response('Offline - Content not available', {
+            status: 503,
+            statusText: 'Service Unavailable',
+            headers: new Headers({
+                'Content-Type': 'text/plain'
+            })
+        });
     }
 }
 
 // Network First Strategy - Try network, fallback to cache
 async function networkFirst(request) {
     try {
-        console.log('[Service Worker] Network first:', request.url);
+        console.log('[Service Worker] 🌐 Network first:', request.url);
         const networkResponse = await fetch(request);
         
         // Cache successful responses
         if (networkResponse && networkResponse.status === 200) {
             const cache = await caches.open(RUNTIME_CACHE);
-            cache.put(request, networkResponse.clone());
+            cache.put(request, networkResponse.clone()).catch(err => {
+                console.warn('[Service Worker] Failed to cache:', request.url, err);
+            });
         }
         
         return networkResponse;
     } catch (error) {
-        console.log('[Service Worker] Network failed, trying cache:', request.url);
+        console.log('[Service Worker] 📴 Network failed, trying cache:', request.url);
         const cachedResponse = await caches.match(request);
         
         if (cachedResponse) {
+            console.log('[Service Worker] ✅ Serving from cache (offline):', request.url);
             return cachedResponse;
         }
         
-        throw error;
+        // For navigation requests, return index.html from cache
+        if (request.mode === 'navigate' || request.destination === 'document') {
+            const cache = await caches.open(CACHE_NAME);
+            const offlinePage = await cache.match('./index.html');
+            if (offlinePage) {
+                console.log('[Service Worker] 🏠 Serving index.html (offline)');
+                return offlinePage;
+            }
+        }
+        
+        // Return a basic offline response
+        return new Response('Offline - Content not available', {
+            status: 503,
+            statusText: 'Service Unavailable',
+            headers: new Headers({
+                'Content-Type': 'text/plain'
+            })
+        });
     }
 }
 
