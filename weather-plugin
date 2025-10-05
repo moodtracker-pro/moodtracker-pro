@@ -1,0 +1,146 @@
+/**
+ * Weather Integration Plugin for MoodTracker Pro
+ * 
+ * @description Automatically records weather conditions with mood entries
+ * @version 1.0.0
+ * @author MoodTracker Team
+ * @license MIT
+ */
+
+(function() {
+    'use strict';
+    
+    const plugin = {
+        // Plugin metadata
+        name: 'Weather Integration',
+        version: '1.0.0',
+        author: 'MoodTracker Team',
+        description: 'Automatically record weather conditions with mood entries',
+        
+        // Configuration
+        config: {
+            apiKey: '', // OpenWeatherMap API key (free tier: https://openweathermap.org/api)
+            units: 'metric', // 'metric' for Celsius, 'imperial' for Fahrenheit
+            enabled: true,
+            autoAppend: true // Automatically append weather to notes
+        },
+        
+        // Plugin lifecycle
+        init: function(api) {
+            this.api = api;
+            console.log(`🌤️ ${this.name} v${this.version} initialized`);
+            
+            // Load saved configuration
+            this.loadConfig();
+            
+            // Register event listeners
+            if (this.config.enabled) {
+                this.registerEventListeners();
+            }
+            
+            // Add configuration UI
+            this.addConfigurationUI();
+        },
+        
+        destroy: function() {
+            console.log(`🌤️ ${this.name} destroyed`);
+        },
+        
+        // Configuration management
+        loadConfig: function() {
+            const saved = localStorage.getItem('plugin_weather_config');
+            if (saved) {
+                this.config = { ...this.config, ...JSON.parse(saved) };
+            }
+        },
+        
+        saveConfig: function() {
+            localStorage.setItem('plugin_weather_config', JSON.stringify(this.config));
+            this.api.showToast('Weather plugin settings saved!');
+        },
+        
+        // Event handling
+        registerEventListeners: function() {
+            this.api.on('moodSaved', async (data) => {
+                if (!this.config.apiKey) {
+                    console.warn('Weather plugin: API key not configured');
+                    return;
+                }
+                
+                if (!this.config.autoAppend) {
+                    return;
+                }
+                
+                try {
+                    const weather = await this.fetchWeather();
+                    
+                    // Append weather to note
+                    const currentNote = data.mood.note || '';
+                    const weatherNote = `\n\n[Weather: ${weather.description}, ${weather.temp}°${this.config.units === 'metric' ? 'C' : 'F'}]`;
+                    
+                    this.api.updateMood(data.mood.id, {
+                        note: currentNote + weatherNote
+                    });
+                    
+                    console.log('Weather data added to mood entry');
+                } catch (error) {
+                    console.error('Failed to fetch weather:', error);
+                }
+            });
+        },
+        
+        // Fetch weather data
+        fetchWeather: async function() {
+            if (!navigator.geolocation) {
+                throw new Error('Geolocation not supported');
+            }
+            
+            // Get user location
+            const position = await new Promise((resolve, reject) => {
+                navigator.geolocation.getCurrentPosition(resolve, reject);
+            });
+            
+            const { latitude, longitude } = position.coords;
+            
+            // Fetch weather from OpenWeatherMap
+            const url = `https://api.openweathermap.org/data/2.5/weather?lat=${latitude}&lon=${longitude}&appid=${this.config.apiKey}&units=${this.config.units}`;
+            
+            const response = await fetch(url);
+            if (!response.ok) {
+                throw new Error(`Weather API error: ${response.status}`);
+            }
+            
+            const data = await response.json();
+            
+            return {
+                description: data.weather[0].description,
+                temp: Math.round(data.main.temp),
+                humidity: data.main.humidity,
+                pressure: data.main.pressure,
+                windSpeed: data.wind.speed,
+                icon: data.weather[0].icon,
+                location: data.name
+            };
+        },
+        
+        // Configuration UI
+        addConfigurationUI: function() {
+            // This would add a settings panel to the plugin marketplace modal
+            // For now, users can configure via localStorage or browser console
+            console.log('Weather Plugin Configuration:');
+            console.log('Set API key: localStorage.setItem("plugin_weather_config", JSON.stringify({apiKey: "YOUR_KEY", enabled: true}))');
+            console.log('Get free API key: https://openweathermap.org/api');
+        }
+    };
+    
+    // Auto-register plugin
+    if (window.MoodTrackerAPI) {
+        window.MoodTrackerAPI.registerPlugin(plugin);
+    } else {
+        document.addEventListener('DOMContentLoaded', () => {
+            if (window.MoodTrackerAPI) {
+                window.MoodTrackerAPI.registerPlugin(plugin);
+            }
+        });
+    }
+})();
