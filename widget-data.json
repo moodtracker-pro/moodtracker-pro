@@ -1,0 +1,47 @@
+{
+  "name": "MoodTracker Mood Widget",
+  "description": "Quick access to log your current mood",
+  "data": {
+    "moods": [
+      {
+        "emoji": "😊",
+        "label": "Happy",
+        "value": 5
+      },
+      {
+        "emoji": "😌",
+        "label": "Content",
+        "value": 4
+      },
+      {
+        "emoji": "😐",
+        "label": "Neutral",
+        "value": 3
+      },
+      {
+        "emoji": "😔",
+        "label": "Down",
+        "value": 2
+      },
+      {
+        "emoji": "😢",
+        "label": "Sad",
+        "value": 1
+      }
+    ],
+    "quick_actions": [
+      {
+        "label": "Log Mood",
+        "action": "log",
+        "url": "/index.html?action=log"
+      },
+      {
+        "label": "View Analytics",
+        "action": "analytics",
+        "url": "/index.html?action=analytics"
+      }
+    ]
+  },
+  "update_frequency": 86400,
+  "version": "1.0.0"
+}
